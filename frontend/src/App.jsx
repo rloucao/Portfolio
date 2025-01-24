@@ -2,21 +2,14 @@ import React, { useEffect, useState } from 'react'
 
 import icon from './assets/RL.png'
 import AnimatedText from './components/AnimatedText'
-import Slideshow from './components/Slideshow'
-import programming1 from "./assets/programming1.jpg"
-import programming2 from "./assets/programming2.jpg"
-import programming3 from "./assets/programming3.png"
-import meiadescobrimentos from "./assets/meiadescobrimentos.png"
-import fimDeEuropa from "./assets/33-corrida-fim-da-europa.jpg"
-import meiaCascais from "./assets/meiaCascais.png"
-
-
+import video from './assets/background.mp4';
 
 function App() {
   const [scrollPos, setScrollPos] = useState(0)
   const [positionTop, setPositionTop] = useState(0)
   const [positionLeft, setPositionLeft] = useState(0)
   const [textColor, setTextColor] = useState('white')
+
 
   const updateCenterPosition = () => {
     setPositionTop((window.innerHeight / 2))
@@ -42,12 +35,31 @@ function App() {
 
   const fontSizeName = Math.max(4 - scrollPos /100 , 1.5) + 'rem';
   const fontSizeText = Math.max(1 - scrollPos /100 , 1.5) + 'rem';
+  const isFullTop = scrollPos > 100;
 
   const styles = {
+    introduction: {
+      position: 'fixed',
+      transition: 'top 0.2s ease-out, left 0.2s ease-out',
+      top: `${positionTop - 40}px`,
+      left: `${positionLeft - 450}px`,
+      fontSize: fontSizeText,
+      opacity: Math.max(0.3 - scrollPos / 100, 0),
+      color: 'black',
+    },
+    fullDev: {
+      position: 'fixed',
+      transition: 'top 0.2s ease-out, left 0.2s ease-out',
+      top: `${positionTop - 40}px`,
+      fontSize: fontSizeText,
+      left: `${positionLeft + 240}px`,
+      opacity: Math.max(0.3 - scrollPos / 100, 0),
+      color: 'ivory',
+    },
     name:{
       transition: 'top 0.2s ease-out, left 0.2s ease-out',
       position: 'fixed',
-      top: `${Math.max(positionTop - scrollPos * 5.5, 30)}px`,
+      top: `${Math.max(positionTop - 60 - scrollPos * 5.5, 30)}px`,
       left: `${positionLeft}px`,
       alignItems: 'center',
       transform: 'translate(-50%, -50%)',
@@ -62,6 +74,7 @@ function App() {
       height: '300vh',
       overflowY: 'scroll',
       position: 'relative',
+      
     },
     pageContent: {
       width: '800px',
@@ -87,29 +100,35 @@ function App() {
       color: textColor,
       textShadow: textColor === "white" ? "2px 2px 4px rgba(0,0,0,0.5)" : "2px 2px 4px rgba(255,255,255,0.5)",
     },
+    video: {
+      position: 'absolute',
+      width: '100vw',
+      height: '100vh',
+      display: 'flex',
+      zIndex: '-1',
+      top: '0',
+      left: '0',
+      objectFit: 'cover',
+    },
   };
-
-  const imagesP = [
-    programming1,programming2,programming3
-  ]
-  const imagesR = [
-    meiadescobrimentos,fimDeEuropa,meiaCascais
-  ]
   return (
-    <div style={styles.container}>
-      <Slideshow images={(scrollPos < 799 ) ? imagesP: imagesR} interval={5000} onColorChange={setTextColor} />
+    <>
+     <video src={video} autoPlay loop muted style={styles.video}></video> 
+     <div style={styles.container}>
       <div style={styles.pageContent}>
+        <h2 style={styles.introduction}>Hello! My name is</h2>
         <h1 style={styles.name}>Rodrigo Loução</h1>
+        <h2 style={styles.fullDev}>I am a Full Stack Developer</h2>
+        <AnimatedText text='I am a FullStack Dev' scrollPos={scrollPos} startPos={0} endPos={74}/>
         <img src={icon} alt='Rodrigo Loução' style={styles.icon}/>
         <div style={styles.text}>
-          <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={500} color={textColor}/>
-          <AnimatedText text='I am a Full Stack developer' scrollPos={scrollPos} startPos={499} endPos={800} color={textColor}/>
-          <AnimatedText text='And' scrollPos={scrollPos} startPos={799} endPos={1100} color={textColor} />
-          <AnimatedText text='A passionate Runner' scrollPos={scrollPos} startPos={1099} endPos={9000} color={textColor}/>
+          <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={500} />
         </div>
-       
         </div>
       </div>
+    </>
+   
+      
      
   )
 }

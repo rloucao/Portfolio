@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AnimatedText = ({text, scrollPos, startPos, endPos, color}) => {
+const AnimatedText = ({text, scrollPos, startPos, endPos}) => {
     const isVisible = scrollPos > startPos && scrollPos < endPos;
 
     const style = {
@@ -8,7 +8,6 @@ const AnimatedText = ({text, scrollPos, startPos, endPos, color}) => {
         transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
         transition: 'opacity 0.5s ease, transform 0.5s ease',
         color: 'darkgray ',
-        textShadow: color === "white" ? "2px 2px 4px rgba(0,0,0,0.5)" : "2px 2px 4px rgba(255,255,255,0.5)",
         marginBottom: '20px',
     }
 
