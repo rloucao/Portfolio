@@ -7,7 +7,7 @@ const AnimatedText = ({text, scrollPos, startPos, endPos}) => {
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
         transition: 'opacity 0.5s ease, transform 0.5s ease',
-        color: 'darkgray ',
+        color: 'cadetblue  ',
         marginBottom: '20px',
     }
 

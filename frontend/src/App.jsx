@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import icon from './assets/RL.png'
 import AnimatedText from './components/AnimatedText'
 import video from './assets/background.mp4';
+import NavBar from './components/NavBar';
+import './styles/NavBar.css'
+
 
 function App() {
   const [scrollPos, setScrollPos] = useState(0)
@@ -33,9 +36,11 @@ function App() {
     }
   }, []);
 
-  const fontSizeName = Math.max(4 - scrollPos /100 , 1.5) + 'rem';
-  const fontSizeText = Math.max(1 - scrollPos /100 , 1.5) + 'rem';
-  const isFullTop = scrollPos > 100;
+
+  let fontSizeName = Math.max(4 - scrollPos /100 , 1.5) + 'rem';
+  let fontSizeText = Math.max(1 - scrollPos /100 , 1.5) + 'rem';
+  let topPos = Math.max(positionTop - 60 - scrollPos * 3, 17);
+
 
   const styles = {
     introduction: {
@@ -59,7 +64,7 @@ function App() {
     name:{
       transition: 'top 0.2s ease-out, left 0.2s ease-out',
       position: 'fixed',
-      top: `${Math.max(positionTop - 60 - scrollPos * 5.5, 30)}px`,
+      top: `${topPos}px`,
       left: `${positionLeft}px`,
       alignItems: 'center',
       transform: 'translate(-50%, -50%)',
@@ -113,16 +118,16 @@ function App() {
   };
   return (
     <>
-     <video src={video} autoPlay loop muted style={styles.video}></video> 
+     <video src={video} autoPlay loop muted style={styles.video} />
+     <NavBar TopPos={positionTop}/>
      <div style={styles.container}>
       <div style={styles.pageContent}>
         <h2 style={styles.introduction}>Hello! My name is</h2>
         <h1 style={styles.name}>Rodrigo Loução</h1>
         <h2 style={styles.fullDev}>I am a Full Stack Developer</h2>
-        <AnimatedText text='I am a FullStack Dev' scrollPos={scrollPos} startPos={0} endPos={74}/>
         <img src={icon} alt='Rodrigo Loução' style={styles.icon}/>
         <div style={styles.text}>
-          <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={500} />
+          <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={900} />
         </div>
         </div>
       </div>
