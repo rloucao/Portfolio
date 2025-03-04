@@ -4,7 +4,7 @@ import icon from './assets/RL.png'
 import AnimatedText from './components/AnimatedText'
 import video from './assets/background.mp4';
 import NavBar from './components/NavBar';
-import './styles/NavBar.css'
+import './styles/NavBar.css';
 
 
 function App() {
@@ -130,6 +130,7 @@ function App() {
           <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={900} />
         </div>
         </div>
+        
       </div>
     </>
    
