@@ -5,6 +5,7 @@ import AnimatedText from './components/AnimatedText'
 import video from './assets/background.mp4';
 import NavBar from './components/NavBar';
 import './styles/NavBar.css';
+import TiltProjectsCard from './components/TiltProjectsCard'
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
   let fontSizeText = Math.max(1 - scrollPos /100 , 1.5) + 'rem';
   let topPos = Math.max(positionTop - 60 - scrollPos * 3, 17);
 
+  console.log(scrollPos)
 
   const styles = {
     introduction: {
@@ -97,7 +99,7 @@ function App() {
     text: {
       transition: "top 0.2s ease-out, left 0.2s ease-out",
       position: "fixed",
-      top: `${Math.max(positionTop + 100 - scrollPos * 0.5, 300)}px`,
+      top: `${Math.max(positionTop + 50 - scrollPos * 0.5, 150)}px`,
       left: `${positionLeft}px`,
       alignItems: "center",
       transform: "translate(-50%, -50%)",
@@ -118,19 +120,25 @@ function App() {
   };
   return (
     <>
+    <TiltProjectsCard />
      <video src={video} autoPlay loop muted style={styles.video} />
-     <NavBar TopPos={positionTop}/>
-     <div style={styles.container}>
-      <div style={styles.pageContent}>
-        <h2 style={styles.introduction}>Hello! My name is</h2>
-        <h1 style={styles.name}>Rodrigo Loução</h1>
-        <h2 style={styles.fullDev}>I am a Full Stack Developer</h2>
-        <img src={icon} alt='Rodrigo Loução' style={styles.icon}/>
-        <div style={styles.text}>
-          <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={900} />
+      <NavBar TopPos={positionTop}/>
+      <div style={styles.container}>
+        <div style={styles.pageContent}>
+          <h2 style={styles.introduction}>Hello! My name is</h2>
+          <h1 style={styles.name}>Rodrigo Loução</h1>
+          <h2 style={styles.fullDev}>I am a Full Stack Developer</h2>
+          <img src={icon} alt='Rodrigo Loução' style={styles.icon}/>
+          <div style={styles.text}>
+            <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={800} />
+          </div>
+          {/* Make a tilt card for each project on git, background is an image of the project, when you click on it, it goes to the either the website or the github repo */}
+        <div>
+          <TiltProjectsCard scrollPos={scrollPos} />
+          <TiltProjectsCard scrollPos={scrollPos} />
+          <TiltProjectsCard scrollPos={scrollPos} />
         </div>
-        </div>
-        
+        </div>        
       </div>
     </>
    
