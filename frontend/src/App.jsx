@@ -81,6 +81,7 @@ function App() {
       height: '300vh',
       overflowY: 'scroll',
       position: 'relative',
+      "width": '100vw',
       
     },
     pageContent: {
@@ -117,6 +118,13 @@ function App() {
       left: '0',
       objectFit: 'cover',
     },
+    tiltdiv:{
+      'display' : 'flex',
+      'alignItem' : 'center',
+      justifyContent: 'center',
+      'gap' : '150px',
+      
+    },
   };
   return (
     <>
@@ -130,14 +138,14 @@ function App() {
           <h2 style={styles.fullDev}>I am a Full Stack Developer</h2>
           <img src={icon} alt='Rodrigo Loução' style={styles.icon}/>
           <div style={styles.text}>
-            <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={75} endPos={800} />
+            <AnimatedText text='Welcome to my portfolio!' scrollPos={scrollPos} startPos={250} endPos={9000} />
           </div>
           {/* Make a tilt card for each project on git, background is an image of the project, when you click on it, it goes to the either the website or the github repo */}
-        <div>
-          <TiltProjectsCard scrollPos={scrollPos} />
-          <TiltProjectsCard scrollPos={scrollPos} />
-          <TiltProjectsCard scrollPos={scrollPos} />
-        </div>
+          <div style={styles.tiltdiv}>
+            <TiltProjectsCard scrollPos={scrollPos} />
+            <TiltProjectsCard scrollPos={scrollPos} />
+            <TiltProjectsCard scrollPos={scrollPos} />
+          </div>
         </div>        
       </div>
     </>
