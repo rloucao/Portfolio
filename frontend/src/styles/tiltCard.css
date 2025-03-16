@@ -1,0 +1,10 @@
+.hover-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out, opacity 0.3s ease;
+  }
+  
+  .hover-card:hover {
+    transform-style: preserve-3d;
+  }
+  
