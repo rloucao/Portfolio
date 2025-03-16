@@ -4,9 +4,9 @@ import icon from "./assets/RL.png";
 import AnimatedText from "./components/AnimatedText";
 import video from "./assets/background.mp4";
 import TiltProjectsCard from "./components/TiltProjectsCard";
-import ImageRLS1 from "./../public/resized_screenshot.png";
-import ImageRLS2 from "./../public/Screenshot 2025-03-16 000614.png";
-import ImageRL from "./../public/gatonix(1)(1)(1).png";
+import ImageRLS1 from "./assets/resized_screenshot.png";
+import ImageRLS2 from "./assets/Screenshot 2025-03-16 000614.png";
+import ImageRL from "./assets/gatonix.png";
 
 function App() {
   const [scrollPos, setScrollPos] = useState(0);
@@ -112,7 +112,7 @@ function App() {
     aboutmeTag: {
       position: "fixed",
       top: `${positionTop}px`,
-
+      left: "50%",
       fontSize: fontSizeText,
       color: "#05377b",
       textShadow:
@@ -139,10 +139,10 @@ function App() {
     },
     aboutmeimg: {
       position: "fixed",
-      top: `${Math.max(positionTop + 5 - scrollPos * 0.1, 150)}px`,
+      top: `${Math.max(positionTop + 500 - scrollPos * 0.1, 150)}px`,
       left: "10%",
-      borderRadius: "10%",
-      opacity: Math.max(9 - scrollPos / 100, 0),
+      borderRadius: "20%",
+      opacity: Math.max(1 - scrollPos / 100, 0),
       transition: "opacity 0.5s ease",
     },
     projectstext: {
@@ -168,7 +168,6 @@ function App() {
   };
   return (
     <>
-      <TiltProjectsCard />
       <video src={video} autoPlay loop muted style={styles.video} />
       <div style={styles.container}>
         <h2 style={styles.introduction}>Hello! My name is</h2>
@@ -192,11 +191,11 @@ function App() {
 
         <div style={styles.aboutmeContainer}>
           <AnimatedText
-            text="Projects"
+            text="about me"
             scrollPos={scrollPos}
             startPos={99}
             endPos={199}
-            customStyle={styles.projectstext}
+            customStyle={styles.aboutmeTag}
           />
           <img src={ImageRL} alt="Rodrigo Loução" style={styles.aboutmeimg} />
 
