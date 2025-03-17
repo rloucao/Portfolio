@@ -8,6 +8,11 @@ import ImageRLS1 from "./assets/resized_screenshot.png";
 import ImageRLS2 from "./assets/Screenshot 2025-03-16 000614.png";
 import ImageRL from "./assets/gatonix.png";
 import ImageMeia from './assets/meia-dezembro-podio.png'
+import ImageMeia2 from './assets/podio-meia-dezembro-sozinho.jpeg'
+import Medalha from './assets/medalha-meia.jpeg'
+import Medalha2 from './assets/medalha-FDE.jpeg'
+import Running from './assets/correr-meia.jpeg'
+
 
 function App() {
   const [scrollPos, setScrollPos] = useState(0);
@@ -163,7 +168,7 @@ function App() {
     },
     passionsText: {
       position: "fixed",
-      top: `${Math.max(positionTop + 50 - scrollPos * 0.1, 150)}px`,
+      top: `${Math.max(positionTop + 120 - scrollPos * 0.1, 150)}px`,
       transform: "translate(-50%, -50%)",
       fontSize: fontSizeText,
       color: textColor,
@@ -179,7 +184,7 @@ function App() {
     },
     passionsimg: {
       position: "fixed",
-      top: `${Math.max(positionTop + 25 - scrollPos * 0.18, 150)}px`,
+      top: `${Math.max(positionTop - scrollPos * 0.1, 150)}px`,
       left: "10%",
       borderRadius: "20%",
       opacity: isVisible(scrollPos, 1000, 2000) ? 1 : 0,
