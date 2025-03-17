@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
 
 import icon from "./assets/RL.png";
-import AnimatedText from "./components/AnimatedText";
+import AnimatedText from "./components/animated-text";
 import video from "./assets/background.mp4";
-import TiltProjectsCard from "./components/TiltProjectsCard";
+import TiltProjectsCard from "./components/tilt-projects-card";
 import ImageRLS1 from "./assets/resized_screenshot.png";
 import ImageRLS2 from "./assets/Screenshot 2025-03-16 000614.png";
 import ImageRL from "./assets/gatonix.png";
+import ImageMeia from './assets/meia-dezembro-podio.png'
 
 function App() {
   const [scrollPos, setScrollPos] = useState(0);
   const [positionTop, setPositionTop] = useState(0);
   const [positionLeft, setPositionLeft] = useState(0);
   const [textColor] = useState("white");
+
+  const isVisible = (scrollPos, startPos, endPos) => {
+    return scrollPos > startPos && scrollPos < endPos;
+  };
 
   const updateCenterPosition = () => {
     setPositionTop(window.innerHeight / 2);
@@ -47,7 +52,7 @@ function App() {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      height: "300vh",
+      height: "500vh",
       overflowY: "scroll",
       position: "relative",
       width: "100vw",
@@ -103,23 +108,19 @@ function App() {
       fontWeight: "bold",
       zIndex: 3,
     },
-    aboutmeContainer: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "50px",
-    },
     aboutmeTag: {
+      transition: "top 0.2s ease-out, left 0.2s ease-out",
       position: "fixed",
-      top: `${positionTop}px`,
-      left: "50%",
+      top: `${Math.max(positionTop - scrollPos * 0.3, 150)}px`,
+      left: `${positionLeft - 50}px`,
       fontSize: fontSizeText,
-      color: "#05377b",
+      color: textColor,
       textShadow:
         textColor === "white"
           ? "2px 2px 4px rgba(0,0,0,0.5)"
           : "2px 2px 4px rgba(255,255,255,0.5)",
       fontFamily: "monospace",
+      fontWeight: "bold",
     },
     aboutmetext: {
       position: "fixed",
@@ -139,11 +140,51 @@ function App() {
     },
     aboutmeimg: {
       position: "fixed",
-      top: `${Math.max(positionTop + 500 - scrollPos * 0.1, 150)}px`,
+      top: `${Math.max(positionTop + 25 - scrollPos * 0.18, 150)}px`,
       left: "10%",
       borderRadius: "20%",
-      opacity: Math.max(1 - scrollPos / 100, 0),
+      opacity: isVisible(scrollPos, 550, 999) ? 1 : 0,
       transition: "opacity 0.5s ease",
+      
+    },
+    passionsTag: {
+      transition: "top 0.2s ease-out, left 0.2s ease-out",
+      position: "fixed",
+      top: `${Math.max(positionTop - scrollPos * 0.3, 150)}px`,
+      left: `${positionLeft - 65}px`,
+      fontSize: fontSizeText,
+      color: textColor,
+      textShadow:
+        textColor === "white"
+          ? "2px 2px 4px rgba(0,0,0,0.5)"
+          : "2px 2px 4px rgba(255,255,255,0.5)",
+      fontFamily: "monospace",
+      fontWeight: "bold",
+    },
+    passionsText: {
+      position: "fixed",
+      top: `${Math.max(positionTop + 50 - scrollPos * 0.1, 150)}px`,
+      transform: "translate(-50%, -50%)",
+      fontSize: fontSizeText,
+      color: textColor,
+      textShadow:
+        textColor === "white"
+          ? "2px 2px 4px rgba(0,0,0,0.5)"
+          : "2px 2px 4px rgba(255,255,255,0.5)",
+      fontFamily: "monospace",
+      textAlign: "justify",
+      width: "500px",
+      right: "0",
+      transition: "opacity 0.5s ease",
+    },
+    passionsimg: {
+      position: "fixed",
+      top: `${Math.max(positionTop + 25 - scrollPos * 0.18, 150)}px`,
+      left: "10%",
+      borderRadius: "20%",
+      opacity: isVisible(scrollPos, 1000, 2000) ? 1 : 0,
+      transition: "opacity 0.5s ease",
+      width: "300px",
     },
     projectstext: {
       transition: "top 0.2s ease-out, left 0.2s ease-out",
@@ -163,7 +204,7 @@ function App() {
       alignItems: "center",
       justifyContent: "center",
       gap: "50px",
-      marginTop: "1000px",
+      marginTop: "4000px",
     },
   };
   return (
@@ -188,40 +229,94 @@ function App() {
             fontFamily: "monospace",
           }}
         />
-
-        <div style={styles.aboutmeContainer}>
+        {/* about me */}
+        <div>
           <AnimatedText
             text="about me"
             scrollPos={scrollPos}
-            startPos={99}
-            endPos={199}
+            startPos={250}
+            endPos={999}
             customStyle={styles.aboutmeTag}
           />
-          <img src={ImageRL} alt="Rodrigo Loução" style={styles.aboutmeimg} />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={ImageRL}
+              alt="Rodrigo Loução"
+              style={styles.aboutmeimg}
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/in/rodrigo-lou%C3%A7%C3%A3o-347666268/",
+                  "_blank"
+                )
+              }
+            />
 
+            <AnimatedText
+              text={
+                <>
+                  I am a Computer Science & Engineering student at NOVA
+                  University of Lisbon. I am passionate about technology and
+                  innovation, and I am always looking for new challenges and
+                  opportunities to grow.
+                  <strong> Hope you enjoy my portfolio!</strong>
+                </>
+              }
+              scrollPos={scrollPos}
+              startPos={550}
+              endPos={999}
+              customStyle={styles.aboutmetext}
+            />
+          </div>
+        </div>
+
+        {/* passions */}
+        <div>
+          <img
+            src={ImageMeia}
+            alt="Rodrigo Loução"
+            style={styles.passionsimg}
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/in/rodrigo-lou%C3%A7%C3%A3o-347666268/",
+                "_blank"
+              )
+            }
+          />
+          <AnimatedText
+            text="my passions"
+            scrollPos={scrollPos}
+            startPos={1000}
+            endPos={2000}
+            customStyle={styles.passionsTag}
+          />
           <AnimatedText
             text={
               <>
-                I am a Computer Science & Engineering student at NOVA University
-                of Lisbon. I am passionate about technology and innovation, and
-                I am always looking for new challenges and opportunities to
-                grow.
-                <strong> Hope you enjoy my portfolio!</strong>
+                Running, cycling, swimming—this is how I feel alive. Every step,
+                every mile, every stroke is a way to push my limits and connect
+                with what truly matters. Nature is my gym, the road my guide,
+                and movement my motivation.
               </>
             }
             scrollPos={scrollPos}
-            startPos={300}
-            endPos={899}
-            customStyle={styles.aboutmetext}
+            startPos={1000}
+            endPos={2000}
+            customStyle={styles.passionsText}
           />
         </div>
 
         <div style={styles.tiltdiv}>
           <AnimatedText
-            text="Projects"
+            text="projects"
             scrollPos={scrollPos}
-            startPos={299}
-            endPos={499}
+            startPos={3000}
+            endPos={4000}
             customStyle={styles.projectstext}
           />
           <TiltProjectsCard
