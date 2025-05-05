@@ -1,20 +1,175 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.video-wrapper {
-  position: relative;
+.app-container {
   width: 100vw;
   height: 100vh;
+  background-color: black;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.hero-section {
+  height: 100vh;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.video-wrapper video {
+
+.image-container {
   position: absolute;
-  z-index: 1;
+  bottom: -500px;
+  left: -700px;
+  border-radius: 70%;
+  width: 550%;
+  height: 500px;
+  animation: appear 1s ease-in-out forwards;
+  animation-delay: 3s;
+  opacity: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
 }
 
+.image {
+  width: 340px;
+  height: 340px;
+  border-radius: 70%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
+}
+
+.section {
+  min-height: 50vh;
+  padding: 2rem;
+  color: white;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 3s;
+}
+
+@keyframes fadeIn {
+  to {
+    transform: translateY(-55vh);
+  }
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.skills-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.experience-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  color: white;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.n-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: goUp 3s ease-in-out forwards, shrink 1s ease-in-out forwards;
+  animation-delay: 3s;
+}
+
+@keyframes goUp {
+  to {
+    transform: translate(-50%, -55vh);
+  }
+}
+
+@keyframes shrink {
+  to {
+    transform: translate(-50%, -55vh) scale(0.5);
+  }
+}
+
+.text-container {
+  position: fixed;
+}
