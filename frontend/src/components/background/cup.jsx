@@ -1,4 +1,4 @@
-import "../styles/cup.css";
+import "../../styles/cup.css";
 
 const Cup = () => {
   return (

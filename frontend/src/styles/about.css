@@ -1,0 +1,87 @@
+.about-activities {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-activities li {
+  background: #a9a9aa;
+  border-radius: 16px;
+  padding: 10px 18px;
+  font-size: 1.08em;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: background 0.2s;
+}
+
+.about-activities li:hover {
+  background: #e1e9f0;
+}
+
+.strava-link {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .strava-anchor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  .strava-anchor:hover {
+    background: #ff6f31;
+    transform: translateY(-2px) scale(1.03);
+    color: #fff;
+  }
+  
+  .strava-icon {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+  }
+
+.tech-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .tech-badge {
+    display: flex;
+    align-items: center;
+    background: #a9a9aa;
+    color: #222;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: 500;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  
+  .tech-badge:hover {
+    background: #e1e9f0;
+    color: #007acc;
+    transform: translateY(-2px) scale(1.05);
+  }
+  
+  .tech-icon {
+    margin-right: 8px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+  }
