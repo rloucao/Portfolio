@@ -7,6 +7,12 @@
   gap: 10px;
 }
 
+.about-container h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
 .about-activities li {
   background: #a9a9aa;
   border-radius: 16px;

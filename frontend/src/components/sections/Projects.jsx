@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
-
+import image from "../../assets/image.png";
+import soshair from "../../assets/sos-hair.png";
+import "../../styles/projects.css";
 const ProjectCard = ({ project }) => {
   const { title, description, image, technologies, demo, github } = project;
+
+  const checkIfGitHub = (github) => {
+    return github !== undefined && github !== "";
+  };
 
   return (
     <div className="project-card">
@@ -20,9 +26,11 @@ const ProjectCard = ({ project }) => {
           <a href={demo} target="_blank" rel="noopener noreferrer">
             Live Demo
           </a>
-          <a href={github} target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
+          {checkIfGitHub(github) && (
+            <a href={github} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -36,7 +44,7 @@ ProjectCard.propTypes = {
     image: PropTypes.string.isRequired,
     technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
     demo: PropTypes.string.isRequired,
-    github: PropTypes.string.isRequired,
+    github: PropTypes.string,
   }).isRequired,
 };
 
@@ -61,7 +69,7 @@ Projects.propTypes = {
       image: PropTypes.string.isRequired,
       technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
       demo: PropTypes.string.isRequired,
-      github: PropTypes.string.isRequired,
+      github: PropTypes.string,
     })
   ).isRequired,
 };
@@ -69,31 +77,22 @@ Projects.propTypes = {
 Projects.defaultProps = {
   projects: [
     {
-      title: "E-Commerce Platform",
+      title: "SOS-Hair",
       description:
-        "A full-stack e-commerce platform with user authentication, product management, and payment integration.",
-      image: "https://via.placeholder.com/400x250",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      demo: "#",
-      github: "#",
+        "A website for a hair salon, providing a platform for customers to book appointments, view services, and make payments. And provide a dashboard for the admin to manage the appointments and services.",
+      image: soshair,
+      technologies: ["Next.js", "Tailwind CSS", "Supabase", "Stripe"],
+      demo: "https://sos-hair.pt",
     },
-    {
-      title: "Task Management App",
-      description:
-        "A collaborative task management application with real-time updates and team features.",
-      image: "https://via.placeholder.com/400x250",
-      technologies: ["React", "Firebase", "Material-UI", "Redux"],
-      demo: "#",
-      github: "#",
-    },
+    
     {
       title: "Weather Dashboard",
       description:
-        "A weather application that provides real-time weather data and forecasts using multiple APIs.",
-      image: "https://via.placeholder.com/400x250",
-      technologies: ["JavaScript", "OpenWeather API", "Chart.js", "CSS3"],
-      demo: "#",
-      github: "#",
+        "A weather application that provides real-time weather data and forecasts using open weather API",
+      image: image,
+      technologies: ["Next.js", "OpenWeather API", "Tailwind CSS"],
+      demo: "https://weather-app-seven-psi-87.vercel.app/",
+      github: "https://github.com/rloucao/weather-app",
     },
   ],
 };

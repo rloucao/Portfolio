@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "../../styles/skills.css";
 
 const SkillCategory = ({ title, skills }) => {
   return (
@@ -74,28 +75,27 @@ Skills.propTypes = {
 Skills.defaultProps = {
   skills: {
     frontend: [
-      { name: "React", level: 90 },
-      { name: "JavaScript", level: 85 },
-      { name: "TypeScript", level: 80 },
-      { name: "HTML5", level: 95 },
-      { name: "CSS3", level: 90 },
-      { name: "Redux", level: 75 },
+      { name: "React", level: 60 },
+      { name: "JavaScript", level: 70 },
+      { name: "TypeScript", level: 65 },
+      { name: "HTML5", level: 66 },
+      { name: "CSS3", level: 50 },
+      { name: "Tailwind CSS", level: 68 },
     ],
     backend: [
-      { name: "Node.js", level: 85 },
-      { name: "Express", level: 80 },
+      { name: "Next.js", level: 70 },
+      { name: "Java", level: 80 },
+      { name: "Python", level: 75 },
+      { name: "Kotlin", level: 60 },
       { name: "MongoDB", level: 75 },
       { name: "SQL", level: 70 },
       { name: "RESTful APIs", level: 85 },
-      { name: "GraphQL", level: 70 },
     ],
     tools: [
       { name: "Git", level: 90 },
       { name: "Docker", level: 70 },
       { name: "AWS", level: 65 },
-      { name: "Jest", level: 75 },
-      { name: "Webpack", level: 70 },
-      { name: "Figma", level: 60 },
+      { name: "Figma", level: 40 },
     ],
   },
 };

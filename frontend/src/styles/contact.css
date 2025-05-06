@@ -1,0 +1,144 @@
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .contact-container h2 {
+    text-align: left;
+    font-size: 1.5rem;
+    color: #222;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+  }
+  
+  .contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  
+  .contact-form {
+    flex: 1 1 320px;
+    min-width: 260px;
+  }
+  
+  .contact-info {
+    flex: 1 1 180px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: flex-start;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    color: #444;
+    font-size: 0.98rem;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f5f6fa;
+    transition: border 0.2s;
+    resize: none;
+    color: #222;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border: 1px solid #b3c2cc;
+    outline: none;
+    background: #fff;
+  }
+  
+  button[type="submit"] {
+    background: #e5e7eb;
+    color: #222;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 0.3rem;
+  }
+  
+  button[type="submit"]:hover {
+    background: #d1d5db;
+    color: #111;
+  }
+  
+  .social-links h3,
+  .email h3,
+  .location h3 {
+    margin-bottom: 0.3rem;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #555;
+    background: #f5f6fa;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-weight: 500;
+    font-size: 0.98em;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .social-icons a:hover {
+    background: #e5e7eb;
+    color: #222;
+  }
+  
+  .social-icons i {
+    font-size: 1.1em;
+  }
+  
+  .email p,
+  .location p {
+    margin: 0;
+    color: #555;
+    font-size: 0.98em;
+  }
+  
+  @media (max-width: 800px) {
+    .contact-content {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .contact-info {
+      flex-direction: row;
+      gap: 1.5rem;
+      justify-content: space-between;
+    }
+  }

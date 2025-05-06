@@ -1,12 +1,20 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import "../../styles/contact.css";
+import { SiGithub, SiLinkedin } from "react-icons/si";
+import emailjs from "emailjs-com";
+
+
+const icons ={
+  GitHub: <SiGithub />,
+  LinkedIn: <SiLinkedin />,
+}
 
 const SocialLink = ({ social }) => {
-  const { name, url, icon } = social;
-
+  const { name, url } = social;
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
-      <i className={icon} aria-hidden="true" />
+      {icons[name]}
       <span>{name}</span>
     </a>
   );
@@ -38,6 +46,12 @@ const Contact = ({ socialLinks, email, location }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
+    emailjs.sendForm('service_20250506', 'template_20250506', e.target, 'user_20250506')
+    .then((result) => {
+      console.log(result.text);
+    }, (error) => {
+      console.log(error.text);
+    });
     console.log("Form submitted:", formData);
   };
 
@@ -91,7 +105,7 @@ const Contact = ({ socialLinks, email, location }) => {
             <h3>Connect with me</h3>
             <div className="social-icons">
               {socialLinks.map((social, index) => (
-                <SocialLink key={index} social={social} />
+                  <SocialLink key={index} social={social} />
               ))}
             </div>
           </div>
@@ -125,21 +139,16 @@ Contact.defaultProps = {
   socialLinks: [
     {
       name: "GitHub",
-      url: "https://github.com/yourusername",
+      url: "https://github.com/rloucao",
       icon: "fab fa-github",
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://www.linkedin.com/in/rodrigo-lou%C3%A7%C3%A3o-347666268/",
       icon: "fab fa-linkedin",
     },
-    {
-      name: "Twitter",
-      url: "https://twitter.com/yourusername",
-      icon: "fab fa-twitter",
-    },
   ],
-  email: "your.email@example.com",
+  email: "rodrigoloucao570@gmail.com",
   location: "Lisbon, Portugal",
 };
 

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { FaReact, FaNodeJs, FaGit, FaStrava } from "react-icons/fa";
-import { SiTypescript, SiMongodb, SiExpress } from "react-icons/si";
+import { SiTypescript, SiMongodb, SiNextdotjs, SiSupabase, SiFlutter, SiDart, SiFirebase } from "react-icons/si";
 import "../../styles/about.css";
 
 const techIcons = {
@@ -8,7 +8,11 @@ const techIcons = {
   "Node.js": <FaNodeJs color="#3c873a" />,
   TypeScript: <SiTypescript color="#007acc" />,
   MongoDB: <SiMongodb color="#47a248" />,
-  Express: <SiExpress color="#000" />,
+  "Next.js": <SiNextdotjs color="#000000" />,
+  Supabase: <SiSupabase color="#000000" />,
+  Flutter: <SiFlutter color="#000000" />,
+  Dart: <SiDart color="#000000" />,
+  FireBase: <SiFirebase color="#000000" />,
   Git: <FaGit color="#f34f29" />,
   Strava: <FaStrava color="#fc4c02" />,
 };
@@ -80,7 +84,7 @@ About.propTypes = {
 };
 
 About.defaultProps = {
-  techStack: ["React", "Node.js", "TypeScript", "MongoDB", "Express", "Git"],
+  techStack: ["React", "Node.js", "TypeScript", "Next.js", "Supabase", "Git", "Flutter", "Dart", "FireBase"],
 };
 
 export default About;

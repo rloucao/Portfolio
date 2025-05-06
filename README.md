@@ -1,7 +1,9 @@
 # Portfolio of Rodrigo Loução
 
 ## TODO
-- [ ] Write my own text, instead of the placeholder one
+- [X] Write my own text, instead of the placeholder one (on the sections)
+- [ ] Write my own text, instead of the placeholder one (here on the read me)
+- [ ] Setup emaijs
 
 ---
 

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "../../styles/experience.css";
 
 const TimelineItem = ({ experience }) => {
   const { title, company, date, description } = experience;
@@ -88,39 +89,33 @@ Experience.propTypes = {
 Experience.defaultProps = {
   experience: [
     {
-      title: "Senior Frontend Developer",
-      company: "Tech Solutions Inc.",
-      date: "2021 - Present",
+      title: "Full Stack Developer",
+      company: "Freelancer",
+      date: "2025 - Present",
       description: [
-        "Led a team of 5 developers in building a large-scale e-commerce platform",
-        "Implemented modern React patterns and best practices",
-        "Reduced page load time by 40% through performance optimization",
-        "Mentored junior developers and conducted code reviews",
+        "I design and develop full-stack web applications using Next.js, Tailwind CSS, Supabase, and Stripe — delivering modern, scalable solutions tailored to each client's needs.",
       ],
     },
     {
-      title: "Full Stack Developer",
-      company: "Digital Innovations",
-      date: "2019 - 2021",
+      title: "Full stack developer",
+      company: "Innova Junior Consulting",
+      date: "2024 - 2025",
       description: [
-        "Developed and maintained multiple web applications using MERN stack",
-        "Implemented RESTful APIs and integrated third-party services",
-        "Collaborated with UX/UI designers to create responsive interfaces",
-        "Participated in agile development processes",
+        "Developed web applications with a team of 4 developers using Java, Spring Boot, and React",
       ],
     },
   ],
   education: [
+    {degree: "Master in Computer Science",
+      institution: "University of Science and Technology - NOVA FCT",
+      date: "2025 - 2027",
+    },
     {
       degree: "Bachelor of Science in Computer Science",
-      institution: "University of Technology",
-      date: "2015 - 2019",
+      institution: "University of Science and Technology - NOVA FCT",
+      date: "2021 - 2025",
     },
-    {
-      degree: "Web Development Bootcamp",
-      institution: "Code Academy",
-      date: "2018",
-    },
+    
   ],
 };
 

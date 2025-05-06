@@ -1,0 +1,112 @@
+.experience-container {
+    max-width: 900px;
+    
+  }
+  
+  .experience-container h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+  
+  .timeline {
+    position: relative;
+    margin-left: 30px;
+    padding-left: 30px;
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: start;
+  }
+  
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 12px;
+    width: 18px;
+    height: 18px;
+    background: #007acc;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    z-index: 1;
+  }
+  
+  .timeline-content {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1.5px 6px rgba(0,0,0,0.06);
+    padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+    position: relative;
+    left: 0;
+    min-width: 250px;
+    
+  }
+  
+  .timeline-content h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.15rem;
+    color: #222;
+  }
+  
+  .timeline-content h4 {
+    margin: 0 0 0.2rem 0;
+    font-size: 1rem;
+    color: #007acc;
+    font-weight: 600;
+  }
+  
+  .timeline-date {
+    font-size: 0.95em;
+    color: #888;
+    margin-bottom: 0.7rem;
+  }
+  
+  .timeline-description {
+    margin: 0;
+    padding-left: 1.2em;
+    color: #444;
+    font-size: 1em;
+  }
+  
+  .timeline-description li {
+    margin-bottom: 0.3em;
+  }
+  
+  .education {
+    padding-left: 30px;
+  }
+  
+  .education h3 {
+    color: #007acc;
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+  }
+  
+  .education-item {
+    background: #f5f6fa;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid #007acc;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  
+  .education-item h4 {
+    margin: 0 0 0.2rem 0;
+    color: #222;
+    font-size: 1.05rem;
+  }
+  
+  .education-item p {
+    margin: 0.1rem 0;
+    color: #555;
+  }
+  
+  .education-date {
+    font-size: 0.95em;
+    color: #888;
+  }

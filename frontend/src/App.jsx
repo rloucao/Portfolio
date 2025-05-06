@@ -8,29 +8,49 @@ import Contact from "./components/sections/Contact";
 import "./App.css";
 import image from "./assets/bonito.jpg";
 import image2 from "./assets/bonito-praia.JPEG";
-// import Footprints from "./components/background/footprints";
+import Footprints from "./components/background/footprints";
 
 function App() {
   return (
     <div className="app-container">
       <section className="hero-section">
         <div className="n-container">
-
-          <Name />
+          <button
+            onClick={() => window.open("https://github.com/rloucao")}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            {" "}
+            <Name />{" "}
+          </button>
 
           <div className="image-container">
             <img src={image} alt="profile" className="image" />
             <img src={image2} alt="profile" className="image" />
           </div>
-        {/* <Footprints /> */}
-
         </div>
         <div className="cup-container">
-          <Cup />
+          <button
+            onClick={() => window.open("https://github.com/rloucao/Portfolio")}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <Cup />
+          </button>
         </div>
       </section>
 
       <div className="section-container">
+        <div className="footprints-container">
+          <Footprints />
+        </div>
+
         <section id="about" className="section">
           <About />
         </section>
