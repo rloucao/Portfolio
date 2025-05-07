@@ -1,6 +1,14 @@
 import PropTypes from "prop-types";
 import { FaReact, FaNodeJs, FaGit, FaStrava } from "react-icons/fa";
-import { SiTypescript, SiMongodb, SiNextdotjs, SiSupabase, SiFlutter, SiDart, SiFirebase } from "react-icons/si";
+import {
+  SiTypescript,
+  SiMongodb,
+  SiNextdotjs,
+  SiSupabase,
+  SiFlutter,
+  SiDart,
+  SiFirebase,
+} from "react-icons/si";
 import "../../styles/about.css";
 
 const techIcons = {
@@ -20,23 +28,22 @@ const techIcons = {
 const About = ({ techStack }) => {
   return (
     <div className="about-container">
-
       <div className="about-content">
         <div className="about-text">
           <p>
-            I&apos;m a CS major student with a passion for Full Stack
-            Development. With expertise in both frontend and backend
-            technologies, I build responsive web applications that deliver
-            exceptional user experiences.
+            Hi, I&apos;m a Computer Science major with a passion for Full Stack
+            Development. I specialize in building responsive, user-centric web
+            applications using a wide range of frontend and backend
+            technologies.
           </p>
           <br />
           <p>
-            When I first applied for a CS degree, I had no knowledge about
-            programming, but I had a curiosity for how things work, which
-            evolved into a deep passion for creating meaningful digital
-            experiences. And since then, I have been always looking for new
-            challenges and opportunities to learn and grow, beyond those given
-            in the University.
+            When I started my degree, I knew nothing about programming—just a
+            strong curiosity for how things work. That curiosity soon turned
+            into a drive to create meaningful digital experiences. Since then,
+            I&apos;ve been on a constant journey of learning and growth, always
+            seeking challenges beyond the classroom and turning ideas into
+            real-world solutions.
           </p>
           <br />
           <p>When I&apos;m not coding, you can find me:</p>
@@ -83,7 +90,17 @@ About.propTypes = {
 };
 
 About.defaultProps = {
-  techStack: ["React", "Node.js", "TypeScript", "Next.js", "Supabase", "Git", "Flutter", "Dart", "FireBase"],
+  techStack: [
+    "React",
+    "Node.js",
+    "TypeScript",
+    "Next.js",
+    "Supabase",
+    "Git",
+    "Flutter",
+    "Dart",
+    "FireBase",
+  ],
 };
 
 export default About;
