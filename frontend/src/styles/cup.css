@@ -105,10 +105,10 @@ body {
 .handle {
   position: absolute;
   right: -17px;
-  top: 10px;
+  top: 15px;
   width: 40px;
   height: 45px;
-  border: 10px solid #2a2a2a;
+  border: 8px solid #2a2a2a;
   border-left: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-radius: 50%;
