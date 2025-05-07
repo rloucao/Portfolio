@@ -8,27 +8,67 @@ body {
   min-height: 100vh;
   width: 100vw;
   background: black;
-  
 }
-
-
 
 .cup-container {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 40px;
   z-index: 1000;
-  
+  animation: aparece 1s ease-in-out forwards;
+  animation-delay: 3s;
+  opacity: 0;
+}
+
+@keyframes aparece {
+  to {
+    opacity: 1;
+  }
 }
 
 .cup {
   position: relative;
   width: 70px;
   height: 75px;
-  background: linear-gradient(to right, #f9f9f9, #d9d9d9);
-  border-bottom-left-radius: 45%;
-  border-bottom-right-radius: 45%;
+  background: linear-gradient(to right, #3a3a3a, #2a2a2a);
 }
+
+.cup-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cup-center-content {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: auto;
+  background: linear-gradient(to right, #3a3a3a, #2a2a2a);
+  border-radius: 10px;
+}
+
+.cup-center-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #4CAF50;
+}
+
+.bottom {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: linear-gradient(to right, #3a3a3a, #2a2a2a);
+  border-radius: 50%;
+}
+
 
 .top {
   position: absolute;
@@ -68,9 +108,9 @@ body {
   top: 10px;
   width: 40px;
   height: 45px;
-  border: 6px solid #dcdcdc;
-  border-left: 6px solid transparent;
-  border-bottom: 6px solid transparent;
+  border: 10px solid #2a2a2a;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid transparent;
   border-radius: 50%;
   transform: rotate(42deg);
 }

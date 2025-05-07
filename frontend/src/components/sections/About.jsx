@@ -9,10 +9,10 @@ const techIcons = {
   TypeScript: <SiTypescript color="#007acc" />,
   MongoDB: <SiMongodb color="#47a248" />,
   "Next.js": <SiNextdotjs color="#000000" />,
-  Supabase: <SiSupabase color="#000000" />,
-  Flutter: <SiFlutter color="#000000" />,
-  Dart: <SiDart color="#000000" />,
-  FireBase: <SiFirebase color="#000000" />,
+  Supabase: <SiSupabase color="#3ECF8E" />,
+  Flutter: <SiFlutter color="#02569B" />,
+  Dart: <SiDart color="#0175C2" />,
+  FireBase: <SiFirebase color="#FF8F6B" />,
   Git: <FaGit color="#f34f29" />,
   Strava: <FaStrava color="#fc4c02" />,
 };
@@ -20,7 +20,6 @@ const techIcons = {
 const About = ({ techStack }) => {
   return (
     <div className="about-container">
-      <h2>About Me</h2>
 
       <div className="about-content">
         <div className="about-text">

@@ -1,53 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 .app-container {
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: #212121;
   overflow-y: auto;
   scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
 }
 
 .hero-section {
-  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  height: 20vh;
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: center; /* Add this to vertically center items */
+  max-width: 900px;
+  padding: 0 2rem; /* Add some padding */
 }
 
 .image-container {
-  position: absolute;
-  bottom: -500px;
-  left: -700px;
-  border-radius: 70%;
-  width: 550%;
-  height: 500px;
-  animation: appear 1s ease-in-out forwards;
-  animation-delay: 3s;
   opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 3s;
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: start;
 }
 
 .image {
-  width: 340px;
-  height: 340px;
+  width: 150px;
+  height: 150px;
   border-radius: 70%;
   object-fit: cover;
   flex-shrink: 0;
-}
-
-.cup-container {
-  animation: appear 1s ease-in-out forwards;
-  animation-delay: 3s;
-  opacity: 0;
-}
-
-@keyframes appear {
-  to {
-    opacity: 1;
-  }
 }
 
 .section-container {
@@ -61,34 +48,14 @@
   padding: 2rem;
   animation: fadeIn 1s ease-in-out forwards;
   animation-delay: 3s;
-  display: block;
-  background: #b7b5b5ce;
-  border-radius: 20px;
   margin: 20px auto;
-  color: #111;
   width: 90%;
   max-width: 900px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1.5px 6px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e0e0e0;
   opacity: 0;
-}
-
-.section-projects {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@keyframes fadeIn {
-  to {
-    transform: translateY(-55vh);
-    opacity: 1;
-  }
 }
 
 .about-container {
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 .about-content {
@@ -99,7 +66,6 @@
 
 .projects-container {
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 .projects-grid {
@@ -114,7 +80,6 @@
   border-radius: 10px;
   overflow: hidden;
 }
-
 
 .contact-container {
   max-width: 1200px;
@@ -160,26 +125,52 @@ button:hover {
 }
 
 .n-container {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: goUp 3s ease-in-out forwards, shrink 1s ease-in-out forwards;
-  animation-delay: 3s;
+  opacity: 0;
+  animation: 
+    appear 1s ease-in-out forwards,
+    moveToPosition 1s ease-in-out forwards 3s;
+  z-index: 100;
 }
 
-@keyframes goUp {
+@keyframes appear {
   to {
-    transform: translate(-50%, -55vh);
+    opacity: 1;
   }
 }
 
-@keyframes shrink {
+@keyframes moveToPosition {
   to {
-    transform: translate(-50%, -55vh) scale(0.5);
+    position: relative;
+    display: flex;
+    top: 0;
+    left: 0;
+    transform: translate(0, 0) scale(0.7);
   }
 }
 
 .text-container {
   position: fixed;
+}
+
+.divider {
+  width: 900px;
+  height: 5px;
+  background-color: #f9f9f9;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 1000px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 3s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }

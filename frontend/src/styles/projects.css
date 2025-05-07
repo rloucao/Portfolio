@@ -1,11 +1,10 @@
 .projects-container {
     width: 100%;
-    padding: 2rem 0;
+
   }
 
   .projects-container h2 {
     font-size: 2rem;
-    margin-bottom: 2rem;
     letter-spacing: 1px;
   }
   
@@ -51,12 +50,12 @@
   .project-info h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.3rem;
-    color: #222;
+    color: #f9f9f9;
   }
   
   .project-info p {
     margin: 0 0 1rem 0;
-    color: #555;
+    color: #e2e2e2;
     font-size: 1rem;
   }
   

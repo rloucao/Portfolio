@@ -4,6 +4,23 @@ const Cup = () => {
   return (
     <div className="cup-container">
       <div className="cup">
+        <div className="bottom"></div>
+        <div className="cup-center">
+          <div className="cup-center-content">
+            <div className="cup-center-row">
+              <div className="zero">0</div>
+              <div className="one">1</div>
+              <div className="zero">0</div>
+              <div className="one">1</div>
+            </div>
+            <div className="cup-center-row">
+              <div className="zero">0</div>
+              <div className="one">1</div>
+              <div className="zero">0</div>
+              <div className="one">1</div>
+            </div>
+          </div>
+        </div>
         <div className="top">
           <div className="circle">
             <div className="tea"></div>
