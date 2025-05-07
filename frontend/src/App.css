@@ -15,8 +15,8 @@
   height: 20vh;
   position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: center; /* Add this to vertically center items */
+  justify-content:end ;
+  align-items: end; /* Add this to vertically center items */
   max-width: 900px;
   padding: 0 2rem; /* Add some padding */
 }
@@ -144,11 +144,7 @@ button:hover {
 
 @keyframes moveToPosition {
   to {
-    position: relative;
-    display: flex;
-    top: 0;
-    left: 0;
-    transform: translate(0, 0) scale(0.7);
+    transform: translate(-146%, -190%) scale(0.7);
   }
 }
 
