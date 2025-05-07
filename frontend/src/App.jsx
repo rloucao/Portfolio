@@ -2,13 +2,11 @@ import Cup from "./components/background/cup";
 import Name from "./components/background/name";
 import About from "./components/sections/About";
 import Projects from "./components/sections/Projects";
-import Skills from "./components/sections/Skills";
-import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
 import "./App.css";
 import image from "./assets/bonito.jpg";
 import image2 from "./assets/bonito-praia.JPEG";
-import Footprints from "./components/background/footprints";
+// import Footprints from "./components/background/footprints";
 
 function App() {
   return (
@@ -34,7 +32,7 @@ function App() {
         </div>
         <div className="cup-container">
           <button
-            onClick={() => window.open("https://github.com/rloucao/Portfolio")}
+            onClick={() => window.open("https://buymeacoffee.com/rloucao")}
             style={{
               backgroundColor: "transparent",
               border: "none",
@@ -48,7 +46,7 @@ function App() {
 
       <div className="section-container">
         <div className="footprints-container">
-          <Footprints />
+          {/* <Footprints /> */}
         </div>
 
         <section id="about" className="section">
@@ -56,15 +54,9 @@ function App() {
         </section>
 
         <section id="projects" className="section">
-          <Projects />
-        </section>
-
-        <section id="skills" className="section">
-          <Skills />
-        </section>
-
-        <section id="experience" className="section">
-          <Experience />
+          <div className="section-projects">
+            <Projects />
+          </div>
         </section>
 
         <section id="contact" className="section">

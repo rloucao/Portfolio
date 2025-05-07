@@ -41,9 +41,8 @@
 .cup-container {
   animation: appear 1s ease-in-out forwards;
   animation-delay: 3s;
-  opacity: 0;  
+  opacity: 0;
 }
-
 
 @keyframes appear {
   to {
@@ -74,6 +73,12 @@
   opacity: 0;
 }
 
+.section-projects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes fadeIn {
   to {
     transform: translateY(-55vh);
@@ -101,6 +106,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  width: 100%;
 }
 
 .project-card {
@@ -109,26 +115,6 @@
   overflow: hidden;
 }
 
-.skills-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.experience-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.timeline {
-  position: relative;
-  padding: 2rem 0;
-}
 
 .contact-container {
   max-width: 1200px;
