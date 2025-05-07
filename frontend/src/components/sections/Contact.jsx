@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "../../styles/contact.css";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import emailjs from "emailjs-com";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const icons = {
   GitHub: <SiGithub color="#181717" />,
@@ -33,6 +34,9 @@ const Contact = ({ socialLinks, email, location }) => {
     email: "",
     message: "",
   });
+  const [captchaValue, setCaptchaValue] = useState(null);
+  const [formStatus, setFormStatus] = useState({ message: "", type: "" });
+  const recaptchaRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,8 +46,23 @@ const Contact = ({ socialLinks, email, location }) => {
     }));
   };
 
+  const handleCaptchaChange = (value) => {
+    setCaptchaValue(value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!captchaValue) {
+      setFormStatus({
+        message: "Please verify that you are not a robot",
+        type: "error",
+      });
+      return;
+    }
+
+    setFormStatus({ message: "Sending...", type: "info" });
+
     const serviceId = import.meta.env.VITE_SERVICE_ID;
     const templateId = import.meta.env.VITE_TEMPLATE_ID;
     const params = {
@@ -51,17 +70,30 @@ const Contact = ({ socialLinks, email, location }) => {
       from_email: formData.email,
       message: formData.message,
       date: new Date().toLocaleDateString(),
+      "g-recaptcha-response": captchaValue,
     };
-    // Handle form submission here
+
     emailjs.sendForm(serviceId, templateId, params).then(
       (result) => {
         console.log(result.text);
+        setFormStatus({
+          message: "Message sent successfully!",
+          type: "success",
+        });
+        // Reset form
+        setFormData({ name: "", email: "", message: "" });
+        // Reset reCAPTCHA
+        recaptchaRef.current.reset();
+        setCaptchaValue(null);
       },
       (error) => {
         console.log(error.text);
+        setFormStatus({
+          message: "Failed to send message. Please try again.",
+          type: "error",
+        });
       }
     );
-    console.log("Form submitted:", formData);
   };
 
   return (
@@ -70,6 +102,11 @@ const Contact = ({ socialLinks, email, location }) => {
       <div className="contact-content">
         <div className="contact-form">
           <form onSubmit={handleSubmit}>
+            {formStatus.message && (
+              <div className={`form-status ${formStatus.type}`}>
+                {formStatus.message}
+              </div>
+            )}
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -106,7 +143,16 @@ const Contact = ({ socialLinks, email, location }) => {
                 required
               />
             </div>
-            <button type="submit">Send Message</button>
+            <div className="form-group recaptcha-container">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onChange={handleCaptchaChange}
+              />
+            </div>
+            <button type="submit" disabled={!captchaValue}>
+              Send Message
+            </button>
           </form>
         </div>
         <div className="contact-info">
