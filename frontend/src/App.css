@@ -12,13 +12,14 @@
 .hero-section {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 20px;
   height: 20vh;
   position: relative;
   display: flex;
-  justify-content:end ;
-  align-items: end; /* Add this to vertically center items */
+  justify-content: space-between;
+  flex-direction: row-reverse;
   max-width: 900px;
-  padding: 0 2rem; /* Add some padding */
+  padding: 0 2rem;
 }
 
 .image-container {
@@ -48,7 +49,8 @@
   padding: 2rem;
   animation: fadeIn 1s ease-in-out forwards;
   animation-delay: 3s;
-  margin: 20px auto;
+  margin-left: auto;
+  margin-right: auto;
   width: 90%;
   max-width: 900px;
   opacity: 0;
@@ -124,21 +126,28 @@ button:hover {
   background: #0056b3;
 }
 
+/* Name container styling */
 .n-container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
-  animation: 
-    appear 1s ease-in-out forwards,
-    moveToPosition 1s ease-in-out forwards 3s;
   z-index: 100;
+  transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.n-container.animation-complete {
+  position: relative;
+  top: -15px;
+  left: -5vw;
+  transform: translate(0, 0) scale(0.7);
+  width: 50%;
 }
 
 @keyframes appear {
   to {
     opacity: 1;
+    position: absolute;
   }
 }
 
@@ -153,7 +162,7 @@ button:hover {
 }
 
 .divider {
-  width: 900px;
+  width: 850px;
   height: 5px;
   background-color: #f9f9f9;
   display: block;

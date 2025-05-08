@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Cup from "./components/background/cup";
 import Name from "./components/background/name";
 import About from "./components/sections/About";
@@ -7,12 +8,28 @@ import "./App.css";
 import image2 from "./assets/bonito-praia.JPEG";
 
 function App() {
+  const [animationComplete, setAnimationComplete] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimationComplete(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="app-container">
       {/* Hero section */}
       <section className="hero-section">
         {/* Name container*/}
-        <div className="n-container">
+        <div className="image-container">
+          <img src={image2} alt="profile" className="image" />
+        </div>{" "}
+        <div
+          className={`n-container ${
+            animationComplete ? "animation-complete" : ""
+          }`}
+        >
           <button
             onClick={() => window.open("https://github.com/rloucao")}
             style={{
@@ -21,13 +38,8 @@ function App() {
               cursor: "pointer",
             }}
           >
-            {" "}
-            <Name />{" "}
+            <Name />
           </button>
-        </div>
-        {/* Image container */}
-        <div className="image-container">
-          <img src={image2} alt="profile" className="image" />
         </div>
       </section>
 
@@ -38,7 +50,7 @@ function App() {
         <div className="divider"></div>
 
         <section id="projects" className="section">
-            <Projects />
+          <Projects />
         </section>
 
         <div className="divider"></div>
