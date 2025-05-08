@@ -30,7 +30,7 @@ const About = ({ techStack }) => {
     <div className="about-container">
       <div className="about-content">
         <div className="about-text">
-          <p>
+          <p className="about-text-first">
             Hi, I&apos;m a Computer Science major with a passion for Full Stack
             Development. I specialize in building responsive, user-centric web
             applications using a wide range of frontend and backend
@@ -46,15 +46,7 @@ const About = ({ techStack }) => {
             real-world solutions.
           </p>
           <br />
-          <p>When I&apos;m not coding, you can find me:</p>
-          <ul className="about-activities">
-            <li>📚 Studying</li>
-            <li>🏋️ In the gym</li>
-            <li>🏃 Training for my next race</li>
-            <li>🚵‍♂️ Riding my bike through the mountain trails</li>
-          </ul>
-        </div>
-        <div className="about-image">
+
           <div className="tech-stack">
             <h3>Tech Stack</h3>
             <div className="tech-icons">
@@ -68,6 +60,15 @@ const About = ({ techStack }) => {
               ))}
             </div>
           </div>
+          <br />
+
+          <p>When I&apos;m not coding, you can find me:</p>
+          <ul className="about-activities">
+            <li>📚 Studying</li>
+            <li>🏋️ In the gym</li>
+            <li>🏃 Training for my next race</li>
+            <li>🚵‍♂️ Riding my bike through the mountain trails</li>
+          </ul>
         </div>
       </div>
       <div className="strava-link">

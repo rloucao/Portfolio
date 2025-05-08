@@ -154,8 +154,28 @@ const Contact = ({ socialLinks, email, location }) => {
               Send Message
             </button>
           </form>
+
+          <div className="mobile-contact-info">
+            <div className="social-links">
+              <h3>Connect with me</h3>
+              <div className="social-icons">
+                {socialLinks.map((social, index) => (
+                  <SocialLink key={index} social={social} />
+                ))}
+              </div>
+            </div>
+            <div className="email">
+              <h3>Email</h3>
+              <p>{email}</p>
+            </div>
+            <div className="location">
+              <h3>Location</h3>
+              <p>{location}</p>
+            </div>
+          </div>
         </div>
-        <div className="contact-info">
+
+        <div className="desktop-contact-info">
           <div className="social-links">
             <h3>Connect with me</h3>
             <div className="social-icons">

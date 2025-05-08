@@ -25,13 +25,22 @@
   min-width: 260px;
 }
 
-.contact-info {
+.desktop-contact-info {
   flex: 1 1 180px;
   min-width: 180px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   justify-content: flex-start;
+}
+
+.mobile-contact-info {
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
 }
 
 .form-group {
@@ -137,10 +146,13 @@ button[type="submit"]:hover {
     flex-direction: column;
     gap: 1.5rem;
   }
-  .contact-info {
-    flex-direction: row;
-    gap: 1.5rem;
-    justify-content: space-between;
+
+  .desktop-contact-info {
+    display: none;
+  }
+
+  .mobile-contact-info {
+    display: flex;
   }
 }
 
@@ -150,9 +162,12 @@ button[type="submit"]:hover {
     gap: 1.5rem;
   }
 
-  .contact-info {
-    flex-direction: column;
-    gap: 1.5rem;
+  .desktop-contact-info {
+    display: none;
+  }
+
+  .mobile-contact-info {
+    display: flex;
   }
 
   .social-icons {
