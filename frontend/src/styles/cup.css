@@ -23,7 +23,7 @@ body {
 @media (max-width: 768px) {
   .cup-container {
     bottom: 20px;
-    right: 50px;
+    right: 30px;
   }
 
   .cup {
