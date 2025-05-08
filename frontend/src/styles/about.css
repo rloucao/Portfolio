@@ -52,7 +52,7 @@
 }
 
 .about-activities li {
-  background: #a9a9aa;
+  background: #383838;
   border-radius: 16px;
   padding: 10px 18px;
   font-size: 1.08em;
@@ -63,7 +63,7 @@
 }
 
 .about-activities li:hover {
-  background: #e1e9f0;
+  background: #404040;
 }
 
 .strava-link {

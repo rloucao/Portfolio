@@ -189,8 +189,6 @@ button:hover {
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
-  .app-container {
-  }
 
   .hero-section {
     width: 90%;
@@ -216,6 +214,26 @@ button:hover {
     padding: 0;
     margin: 0;
     min-height: auto;
+  }
+
+  .n-container.animation-complete {
+    width: 100%;
+    left: 0;
+  }
+}
+
+/* tablet devices */
+@media (min-width: 768px) {
+
+  .hero-section {
+    width: 90%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: row-reverse;
+    height: auto;
+    margin-left: auto;
+    padding: 0;
   }
 
   .n-container.animation-complete {
