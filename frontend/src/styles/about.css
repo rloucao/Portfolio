@@ -7,6 +7,16 @@
   gap: 10px;
 }
 
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .about-container{
+    width: 768px;
+    font-size:1rem;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
 .about-container h2 {
   font-size: 2rem;
   margin-bottom: 2rem;

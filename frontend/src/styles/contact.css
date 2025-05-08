@@ -1,5 +1,7 @@
 .contact-container {
   max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .contact-container h2 {
@@ -139,6 +141,22 @@ button[type="submit"]:hover {
     flex-direction: row;
     gap: 1.5rem;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .social-icons {
+    flex-wrap: wrap;
   }
 }
 
