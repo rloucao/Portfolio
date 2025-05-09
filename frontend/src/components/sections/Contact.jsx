@@ -65,35 +65,49 @@ const Contact = ({ socialLinks, email, location }) => {
 
     const serviceId = import.meta.env.VITE_SERVICE_ID;
     const templateId = import.meta.env.VITE_TEMPLATE_ID;
-    const params = {
-      from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message,
-      date: new Date().toLocaleDateString(),
-      "g-recaptcha-response": captchaValue,
-    };
+    const userId = import.meta.env.VITE_EMAILJS_USER_ID;
 
-    emailjs.sendForm(serviceId, templateId, params).then(
-      (result) => {
-        console.log(result.text);
-        setFormStatus({
-          message: "Message sent successfully!",
-          type: "success",
-        });
-        // Reset form
-        setFormData({ name: "", email: "", message: "" });
-        // Reset reCAPTCHA
-        recaptchaRef.current.reset();
-        setCaptchaValue(null);
-      },
-      (error) => {
-        console.log(error.text);
-        setFormStatus({
-          message: "Failed to send message. Please try again.",
-          type: "error",
-        });
-      }
-    );
+    console.log("serviceId: " + serviceId);
+    console.log("templateId: " + templateId);
+    console.log("userId: " + userId);
+    console.log("name: " + formData.name);
+    console.log("email: " + formData.email);
+    console.log("message: " + formData.message);
+
+    emailjs
+      .send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          time: new Date().toLocaleString(),
+          email_id: formData.email,
+          message: formData.message,
+          "g-recaptcha-response": captchaValue,
+        },
+        userId
+      )
+      .then(
+        (result) => {
+          console.log("Success:", result.text);
+          setFormStatus({
+            message: "Message sent successfully!",
+            type: "success",
+          });
+          // Reset form
+          setFormData({ name: "", email: "", message: "" });
+          // Reset reCAPTCHA
+          recaptchaRef.current.reset();
+          setCaptchaValue(null);
+        },
+        (error) => {
+          console.error("Failed:", error.text);
+          setFormStatus({
+            message: "Failed to send message. Please try again.",
+            type: "error",
+          });
+        }
+      );
   };
 
   return (
