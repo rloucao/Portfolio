@@ -38,12 +38,12 @@ const About = ({ techStack }) => {
           </p>
           <br />
           <p>
-            When I started my degree, I knew nothing about programming—just a
-            strong curiosity for how things work. That curiosity soon turned
-            into a drive to create meaningful digital experiences. Since then,
-            I&apos;ve been on a constant journey of learning and growth, always
-            seeking challenges beyond the classroom and turning ideas into
-            real-world solutions.
+            When I started my degree, I knew nothing about programming — I just
+            had a strong curiosity for how things work. That curiosity soon
+            turned into a drive to create meaningful digital experiences. Since
+            then, I&apos;ve been on a constant journey of learning and growth,
+            always seeking challenges beyond the classroom and turning ideas
+            into real-world solutions.
           </p>
           <br />
 
