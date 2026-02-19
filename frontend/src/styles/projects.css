@@ -13,10 +13,20 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Creates responsive columns */
   gap: 2.5rem;
+
+  /* Centering Logic */
   width: 100%;
-  margin: 0 auto;
+  max-width: 1200px; /* 1. Limit the width so it doesn't stretch forever */
+  margin: 0 auto; /* 2. Center the container itself horizontally */
+
+  /* Item Alignment */
+  justify-content: center; /* 3. Centers the columns within the grid container if they don't fill the row */
+  /* justify-items: center; <--- Remove this if you want items to fill their cells, keep if you want them centered in cells */
 }
 
 /* Media queries for responsiveness */
@@ -36,19 +46,25 @@
 .project-card {
   background: #2a2a2a;
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1.5px 6px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    0 1.5px 6px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   width: 100%; /* Take full width of grid cell */
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
 }
 
 .project-card:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 3px 12px rgba(0, 0, 0, 0.09);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 3px 12px rgba(0, 0, 0, 0.09);
 }
 
 .project-image img {
@@ -109,11 +125,84 @@
   border-radius: 8px;
   font-weight: 600;
   font-size: 1em;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .project-links a:hover {
   background: #005fa3;
   color: #fff;
+}
+
+/* ── Client Review — add to projects.css ──────────────────────────────────── */
+
+.client-review {
+  position: relative;
+  margin-top: 1.25rem;
+  padding: 1rem 1.1rem 0.9rem 1.1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 166, 35, 0.08) 0%,
+    rgba(245, 166, 35, 0.03) 100%
+  );
+  border: 1px solid rgba(245, 166, 35, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Subtle shimmer stripe */
+.client-review::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 166, 35, 0.6),
+    transparent
+  );
+}
+
+/* Large decorative quote icon */
+.review-icon {
+  width: 22px;
+  height: 22px;
+  color: #f5a623;
+  opacity: 0.7;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.review-text {
+  margin: 0 0 0.65rem 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #c8bfa8;
+  font-style: italic;
+}
+
+.review-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f5a623;
+  opacity: 0.65;
+}
+
+.review-label::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: #f5a623;
+  opacity: 0.5;
 }

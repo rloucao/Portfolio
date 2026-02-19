@@ -38,28 +38,13 @@ const About = ({ techStack }) => {
           </p>
           <br />
           <p>
-            When I started my degree, I knew nothing about programming — I just
+            When I started my degree, I knew nothing about programming, I just
             had a strong curiosity for how things work. That curiosity soon
             turned into a drive to create meaningful digital experiences. Since
             then, I&apos;ve been on a constant journey of learning and growth,
             always seeking challenges beyond the classroom and turning ideas
             into real-world solutions.
           </p>
-          <br />
-
-          <div className="tech-stack">
-            <h3>Tech Stack</h3>
-            <div className="tech-icons">
-              {techStack.map((tech, index) => (
-                <span className="tech-badge" key={index}>
-                  {techIcons[tech] && (
-                    <span className="tech-icon">{techIcons[tech]}</span>
-                  )}
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
           <br />
 
           <p>When I&apos;m not coding, you can find me:</p>
@@ -90,18 +75,5 @@ About.propTypes = {
   techStack: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-About.defaultProps = {
-  techStack: [
-    "React",
-    "Node.js",
-    "TypeScript",
-    "Next.js",
-    "Supabase",
-    "Git",
-    "Flutter",
-    "Dart",
-    "FireBase",
-  ],
-};
 
 export default About;

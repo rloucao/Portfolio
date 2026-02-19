@@ -1,9 +1,18 @@
 import PropTypes from "prop-types";
 import image from "../../assets/image.png";
 import soshair from "../../assets/sos-hair.png";
+import b130 from "../../assets/b130.png";
 import "../../styles/projects.css";
 const ProjectCard = ({ project }) => {
-  const { title, description, image, technologies, demo, github } = project;
+  const {
+    title,
+    description,
+    image,
+    technologies,
+    demo,
+    github,
+    clienteReview,
+  } = project;
 
   const checkIfGitHub = (github) => {
     return github !== undefined && github !== "";
@@ -32,6 +41,34 @@ const ProjectCard = ({ project }) => {
             </a>
           )}
         </div>
+        {clienteReview && (
+          <div className="client-review">
+            <svg
+              className="review-icon"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.33 20C7.4 20 6 18.4 6 16.27c0-3.8 2.67-7.47 8-11l1.33 1.87C12.2 8.87 10.67 11 10.67 13.33c.44-.13.89-.2 1.33-.2 2 0 3.33 1.47 3.33 3.33C15.33 18.53 12.8 20 9.33 20zm13.34 0c-1.94 0-3.34-1.6-3.34-3.73 0-3.8 2.67-7.47 8-11l1.33 1.87c-3.13 1.73-4.66 3.86-4.66 6.19.44-.13.89-.2 1.33-.2 2 0 3.33 1.47 3.33 3.33C28.66 18.53 26.13 20 22.67 20z"
+                fill="currentColor"
+              />
+            </svg>
+            <p className="review-text">{clienteReview}</p>
+            <svg
+              className="review-icon"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.33 20C7.4 20 6 18.4 6 16.27c0-3.8 2.67-7.47 8-11l1.33 1.87C12.2 8.87 10.67 11 10.67 13.33c.44-.13.89-.2 1.33-.2 2 0 3.33 1.47 3.33 3.33C15.33 18.53 12.8 20 9.33 20zm13.34 0c-1.94 0-3.34-1.6-3.34-3.73 0-3.8 2.67-7.47 8-11l1.33 1.87c-3.13 1.73-4.66 3.86-4.66 6.19.44-.13.89-.2 1.33-.2 2 0 3.33 1.47 3.33 3.33C28.66 18.53 26.13 20 22.67 20z"
+                fill="currentColor"
+              />
+            </svg>
+            <span className="review-label">Client Review</span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -45,6 +82,7 @@ ProjectCard.propTypes = {
     technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
     demo: PropTypes.string.isRequired,
     github: PropTypes.string,
+    clienteReview: PropTypes.string,
   }).isRequired,
 };
 
@@ -70,12 +108,31 @@ Projects.propTypes = {
       technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
       demo: PropTypes.string.isRequired,
       github: PropTypes.string,
-    })
+      clienteReview: PropTypes.string,
+    }),
   ).isRequired,
 };
 
 Projects.defaultProps = {
   projects: [
+    {
+      title: "Barbearia 130",
+      description:
+        "A full-stack booking and management system for a barbershop. Features a high-performance public booking interface and a comprehensive admin dashboard for staff management, financial reporting, and real-time schedule control. Includes role-based access control (RBAC) and automated email notifications.",
+      image: b130, 
+      technologies: [
+        "Next.js 15",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Recharts",
+      ],
+      demo: "https://barbearia130.com",
+      clientReview:
+        "",
+    },
+
     {
       title: "SOS-Hair",
       description:
@@ -83,8 +140,10 @@ Projects.defaultProps = {
       image: soshair,
       technologies: ["Next.js", "Tailwind CSS", "Supabase", "Stripe"],
       demo: "https://sos-hair.pt",
+      clienteReview:
+        "Even though he's still at university, his professionalism and attention to detail completely exceeded my expectations.",
     },
-    
+
     {
       title: "Weather Dashboard",
       description:
