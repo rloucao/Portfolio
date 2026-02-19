@@ -8,7 +8,6 @@ import "./App.css";
 import image2 from "./assets/bonito-praia.JPEG";
 
 function App() {
-  // phase: "animating-in" | "flying" | "fading" | "settled"
   const [phase, setPhase] = useState("animating-in");
   const [flyStyle, setFlyStyle] = useState({});
   const nameRef = useRef(null);
