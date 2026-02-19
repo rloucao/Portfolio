@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Cup from "./components/background/cup";
 import Name from "./components/background/name";
 import About from "./components/sections/About";
@@ -8,27 +8,72 @@ import "./App.css";
 import image2 from "./assets/bonito-praia.JPEG";
 
 function App() {
-  const [animationComplete, setAnimationComplete] = useState(false);
+  // phase: "animating-in" | "flying" | "fading" | "settled"
+  const [phase, setPhase] = useState("animating-in");
+  const [flyStyle, setFlyStyle] = useState({});
+  const nameRef = useRef(null);
+  const targetRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setAnimationComplete(true);
+      if (targetRef.current && nameRef.current) {
+        const targetRect = targetRef.current.getBoundingClientRect();
+        const nameRect = nameRef.current.getBoundingClientRect();
+
+        const fromX = window.innerWidth / 2 - nameRect.width / 2;
+        const fromY = window.innerHeight / 2 - nameRect.height / 2;
+
+        const dx = targetRect.left - fromX;
+        const dy = targetRect.top - fromY;
+
+        // Fly to the exact target position
+        setFlyStyle({
+          transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(1)`,
+          transition: "transform 1.5s cubic-bezier(0.22, 1, 0.36, 1)",
+        });
+        setPhase("flying");
+
+        // Fade out right before the position switch so the snap is invisible
+        const fadeTimer = setTimeout(() => {
+          setPhase("fading");
+          setFlyStyle((prev) => ({
+            ...prev,
+            opacity: 0,
+            transition: "opacity 0.15s ease",
+          }));
+        }, 1500);
+
+        // Switch to relative, then fade back in
+        const settleTimer = setTimeout(() => {
+          setPhase("settled");
+          setFlyStyle({});
+        }, 1700);
+
+        return () => {
+          clearTimeout(fadeTimer);
+          clearTimeout(settleTimer);
+        };
+      }
     }, 3000);
+
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="app-container">
-      {/* Hero section */}
       <section className="hero-section">
-        {/* Name container*/}
         <div className="image-container">
           <img src={image2} alt="profile" className="image" />
-        </div>{" "}
+        </div>
+
+        {/* Invisible placeholder — reserves the exact space in the layout */}
+        <div className="name-placeholder" ref={targetRef} />
+
+        {/* Name: fixed while animating, relative+in-flow once settled */}
         <div
-          className={`n-container ${
-            animationComplete ? "animation-complete" : ""
-          }`}
+          ref={nameRef}
+          className={`n-container ${phase === "settled" ? "settled" : ""}`}
+          style={phase !== "settled" ? flyStyle : {}}
         >
           <button
             onClick={() => window.open("https://github.com/rloucao")}
@@ -58,7 +103,7 @@ function App() {
           <Contact />
         </section>
       </div>
-      {/* Cup container */}
+
       <div className="cup-container">
         <button
           onClick={() => window.open("https://buymeacoffee.com/rloucao")}

@@ -52,3 +52,9 @@ body {
     transform: translateY(-5px);
   }
 }
+
+@media (max-width: 768px) {
+  .name {
+    font-size: 2rem;
+  }
+}

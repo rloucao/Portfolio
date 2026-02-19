@@ -13,13 +13,15 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  height: 20vh;
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: row-reverse;
   max-width: 900px;
   padding: 0 2rem;
+  height: auto;
+  min-height: 160px;
 }
 
 .image-container {
@@ -28,6 +30,7 @@
   animation-delay: 3s;
   display: flex;
   justify-content: start;
+  flex-shrink: 0;
 }
 
 .image {
@@ -36,6 +39,12 @@
   border-radius: 70%;
   object-fit: cover;
   flex-shrink: 0;
+}
+
+.name-placeholder {
+  flex: 1;
+  min-height: 100px;
+  visibility: hidden;
 }
 
 .section-container {
@@ -57,25 +66,9 @@
   opacity: 0;
 }
 
-@media (max-width: 768px) {
-  .section-container {
-    padding: 0;
-  }
-}
-
-.about-container {
-  max-width: 1200px;
-}
-
-.about-content {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.projects-container {
-  max-width: 1200px;
-}
+.about-container { max-width: 1200px; }
+.about-content { display: flex; gap: 2rem; align-items: center; }
+.projects-container { max-width: 1200px; }
 
 .projects-grid {
   display: grid;
@@ -90,25 +83,10 @@
   overflow: hidden;
 }
 
-.contact-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
+.contact-container { max-width: 1200px; margin: 0 auto; }
+.contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; }
 
 .form-group input,
 .form-group textarea {
@@ -128,45 +106,31 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+button:hover { background: #0056b3; }
 
-button:hover {
-  background: #0056b3;
-}
+/* ── Name container ─────────────────────────────────────────── */
 
-/* Name container styling */
 .n-container {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   z-index: 100;
-  transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.n-container.animation-complete {
+.n-container.settled {
   position: relative;
-  top: -15px;
-  left: -5vw;
-  transform: translate(0, 0) scale(0.7);
-  width: 50%;
+  top: unset;
+  left: unset;
+  transform: none;
+  z-index: auto;
+  transition: none;
+  flex: 1;
+  opacity: 0;
+  animation: fadeIn 0.2s ease forwards;
 }
 
-@keyframes appear {
-  to {
-    opacity: 1;
-    position: absolute;
-  }
-}
-
-@keyframes moveToPosition {
-  to {
-    transform: translate(-146%, -190%) scale(0.7);
-  }
-}
-
-.text-container {
-  position: fixed;
-}
+/* ── Divider & animations ────────────────────────────────────── */
 
 .divider {
   width: 100%;
@@ -182,28 +146,29 @@ button:hover {
 }
 
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+  to { opacity: 1; }
 }
 
-/* Media query for smaller screens */
+/* ── Mobile ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-
   .hero-section {
-    width: 90%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    flex-direction: row-reverse;
-    height: auto;
-    margin-left: auto;
+    width: 100%;
+    padding: 1rem 1rem;
+    min-height: 100px;
+    gap: 1rem;
   }
 
   .image {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
+
+  .name-placeholder {
+    flex: 1;
+    min-width: 0;
+    min-height: 80px;
+  }
+
   .section-container {
     width: 90%;
     margin-right: 2%;
@@ -214,30 +179,5 @@ button:hover {
     padding: 0;
     margin: 0;
     min-height: auto;
-  }
-
-  .n-container.animation-complete {
-    width: 100%;
-    left: 0;
-  }
-}
-
-/* tablet devices */
-@media (min-width: 768px) {
-
-  .hero-section {
-    width: 90%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    flex-direction: row-reverse;
-    height: auto;
-    margin-left: auto;
-    padding: 0;
-  }
-
-  .n-container.animation-complete {
-    width: 100%;
-    left: 0;
   }
 }
