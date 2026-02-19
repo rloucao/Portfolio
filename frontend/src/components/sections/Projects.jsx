@@ -118,7 +118,7 @@ Projects.defaultProps = {
     {
       title: "Barbearia 130",
       description:
-        "A full-stack booking and management system for a barbershop. Features a high-performance public booking interface and a comprehensive admin dashboard for staff management, financial reporting, and real-time schedule control. Includes role-based access control (RBAC) and automated email notifications.",
+        "A full-stack booking and management system for a barbershop. Features a high-performance public booking interface and a comprehensive admin dashboard for staff management, financial reporting, and real-time schedule control. Includes role-based access control (RBAC) and automated message notifications.",
       image: b130, 
       technologies: [
         "Next.js 15",
