@@ -2,7 +2,9 @@ import PropTypes from "prop-types";
 import image from "../../assets/image.png";
 import soshair from "../../assets/sos-hair.png";
 import b130 from "../../assets/b130.png";
+import graodareia from "../../assets/graodearia.png";
 import "../../styles/projects.css";
+
 const ProjectCard = ({ project }) => {
   const {
     title,
@@ -116,10 +118,25 @@ Projects.propTypes = {
 Projects.defaultProps = {
   projects: [
     {
+      title: "Grão d' Areia",
+      description:
+        "A full-stack website and management system for a beachside restaurant. Features a public-facing site with menu display and reservation functionality, a sunbed ordering system allowing customers to place orders directly from the beach, and an admin dashboard for booking management, financial tracking, and operational control. Built with a focus on performance and a modern, responsive design.",
+      image: graodareia,
+      technologies: [
+        "Next.js 15",
+        "TypeScript",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Recharts",
+      ],
+      demo: "https://graodareia.com",
+      clientReview: "",
+    },
+    {
       title: "Barbearia 130",
       description:
         "A full-stack booking and management system for a barbershop. Features a high-performance public booking interface and a comprehensive admin dashboard for staff management, financial reporting, and real-time schedule control. Includes role-based access control (RBAC) and automated message notifications.",
-      image: b130, 
+      image: b130,
       technologies: [
         "Next.js 15",
         "TypeScript",
@@ -129,8 +146,7 @@ Projects.defaultProps = {
         "Recharts",
       ],
       demo: "https://barbearia130.com",
-      clientReview:
-        "",
+      clientReview: "",
     },
 
     {
