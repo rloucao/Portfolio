@@ -8,6 +8,9 @@ import {
   SiFlutter,
   SiDart,
   SiFirebase,
+  SiKubernetes,
+  SiDocker
+
 } from "react-icons/si";
 import "../../styles/about.css";
 
@@ -23,11 +26,30 @@ const techIcons = {
   FireBase: <SiFirebase color="#FF8F6B" />,
   Git: <FaGit color="#f34f29" />,
   Strava: <FaStrava color="#fc4c02" />,
+  Kubernetes: <SiKubernetes color="#326CE5" />,
+  Docker: <SiDocker color="#2496ED" />
+
 };
 
-const About = ({ techStack }) => {
+const DEFAULT_TECH_STACK = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "MongoDB",
+  "Supabase",
+  "Flutter",
+  "Dart",
+  "FireBase",
+  "Git",
+  "Kubernetes",
+  "Docker"
+];
+
+const About = ({ techStack = DEFAULT_TECH_STACK }) => {
   return (
     <div className="about-container">
+      <h2>About Me</h2>
       <div className="about-content">
         <div className="about-text">
           <p className="about-text-first">
@@ -56,6 +78,18 @@ const About = ({ techStack }) => {
           </ul>
         </div>
       </div>
+
+      <div className="tech-icons">
+        {techStack.map((tech) =>
+          techIcons[tech] ? (
+            <span key={tech} className="tech-badge">
+              <span className="tech-icon">{techIcons[tech]}</span>
+              {tech}
+            </span>
+          ) : null
+        )}
+      </div>
+
       <div className="strava-link">
         <a
           href="https://www.strava.com/athletes/142855329"
@@ -72,7 +106,7 @@ const About = ({ techStack }) => {
 };
 
 About.propTypes = {
-  techStack: PropTypes.arrayOf(PropTypes.string).isRequired,
+  techStack: PropTypes.arrayOf(PropTypes.string),
 };
 
 

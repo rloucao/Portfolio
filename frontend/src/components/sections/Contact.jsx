@@ -67,13 +67,6 @@ const Contact = ({ socialLinks, email, location }) => {
     const templateId = import.meta.env.VITE_TEMPLATE_ID;
     const userId = import.meta.env.VITE_EMAILJS_USER_ID;
 
-    console.log("serviceId: " + serviceId);
-    console.log("templateId: " + templateId);
-    console.log("userId: " + userId);
-    console.log("name: " + formData.name);
-    console.log("email: " + formData.email);
-    console.log("message: " + formData.message);
-
     emailjs
       .send(
         serviceId,
