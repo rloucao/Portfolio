@@ -107,7 +107,7 @@ export default async function handler(req, res) {
       from: FROM,
       to: TO,
       replyTo: email,
-      subject: `Portfolio contact — ${name}`,
+      subject: `Portfolio contact: ${name}`,
       text: `From: ${name} <${email}>\nSent: ${sentAt}\n\n${message}`,
       html: `
         <div style="font-family:system-ui,sans-serif;line-height:1.6">

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-// import image from "../../assets/image.png"; // used by the commented-out Weather Dashboard entry
 import soshair from "../../assets/sos-hair.png";
 import "../../styles/projects.css";
 
@@ -37,7 +36,7 @@ const ProjectMedia = ({ title, image, video }) => {
           element.pause();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(element);
@@ -113,7 +112,7 @@ const ProjectCard = ({ project }) => {
             </a>
           )}
         </div>
-        {clientReview && (
+        {/* {clientReview && (
           <div className="client-review">
             <svg
               className="review-icon"
@@ -140,7 +139,7 @@ const ProjectCard = ({ project }) => {
             </svg>
             <span className="review-label">Client Review</span>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
@@ -254,15 +253,6 @@ Projects.defaultProps = {
       demo: "https://sos-hair.pt",
       discontinued: true,
     },
-    // {
-    //   title: "Weather Dashboard",
-    //   description:
-    //     "A weather application that provides real-time weather data and forecasts using open weather API",
-    //   image: image,
-    //   technologies: ["Next.js", "OpenWeather API", "Tailwind CSS"],
-    //   demo: "https://weather-app-seven-psi-87.vercel.app/",
-    //   github: "https://github.com/rloucao/weather-app",
-    // },
   ],
 };
 

@@ -58,7 +58,7 @@
 }
 
 .section {
-  min-height: 50vh;
+  min-height: 10vh;
   padding: 2rem;
   animation: fadeIn 1s ease-in-out forwards;
   animation-delay: 3s;
