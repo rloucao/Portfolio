@@ -47,11 +47,10 @@ const DEFAULT_TECH_STACK = [
 const About = ({ techStack = DEFAULT_TECH_STACK }) => {
   return (
     <div className="about-container">
-      <h2>About Me</h2>
       <div className="about-content">
         <div className="about-text">
           <p className="about-text-first">
-            Hi! I&apos;m Rodrigo Loução, a Computer Science master's student at
+            Hi! I&apos;m a Computer Science master's student at
             NOVA FCT, specializing in Cloud Computing and Reliable Systems. I
             build things for the web, for mobile, and increasingly, for the
             infrastructure that holds it all together.

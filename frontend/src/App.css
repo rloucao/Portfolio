@@ -5,8 +5,15 @@
   height: 100vh;
   background-color: #212121;
   overflow-y: auto;
+  /* Reserve the scrollbar gutter so locking/unlocking causes no width jump. */
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   font-family: "Poppins", sans-serif;
+}
+
+/* No scrolling while the name is typing and sliding into place. */
+.app-container.is-locked {
+  overflow-y: hidden;
 }
 
 .hero-section {
@@ -39,12 +46,6 @@
   border-radius: 10%;
   object-fit: cover;
   flex-shrink: 0;
-}
-
-.name-placeholder {
-  flex: 1;
-  min-height: 100px;
-  visibility: hidden;
 }
 
 .section-container {
@@ -110,24 +111,19 @@ button:hover { background: #0056b3; }
 
 /* ── Name container ─────────────────────────────────────────── */
 
+/* Always in flow, so it scrolls with the page instead of sticking to the
+   viewport. JS parks it at centre with a transform, then slides it home. */
 .n-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  z-index: 100;
+  position: relative;
+  flex: 1;
+  z-index: 100; /* lifted while it is still floating over the page */
+  will-change: transform;
 }
 
+/* Once it has arrived it is just another item in the hero row. */
 .n-container.settled {
-  position: relative;
-  top: unset;
-  left: unset;
-  transform: none;
   z-index: auto;
-  transition: none;
-  flex: 1;
-  opacity: 0;
-  animation: fadeIn 0.2s ease forwards;
+  will-change: auto;
 }
 
 /* ── Divider & animations ────────────────────────────────────── */
@@ -163,7 +159,7 @@ button:hover { background: #0056b3; }
     height: 90px;
   }
 
-  .name-placeholder {
+  .n-container {
     flex: 1;
     min-width: 0;
     min-height: 80px;
