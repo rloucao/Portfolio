@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local env
+.env
+.env.local
+
+# Source video masters (transcoded into public/videos)
+src/assets/videos/

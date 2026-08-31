@@ -2,8 +2,7 @@ import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "../../styles/contact.css";
 import { SiGithub, SiLinkedin } from "react-icons/si";
-import emailjs from "emailjs-com";
-import ReCAPTCHA from "react-google-recaptcha";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 const icons = {
   GitHub: <SiGithub color="#181717" />,
@@ -34,9 +33,10 @@ const Contact = ({ socialLinks, email, location }) => {
     email: "",
     message: "",
   });
-  const [captchaValue, setCaptchaValue] = useState(null);
+  const [captchaToken, setCaptchaToken] = useState(null);
   const [formStatus, setFormStatus] = useState({ message: "", type: "" });
-  const recaptchaRef = useRef(null);
+  const [sending, setSending] = useState(false);
+  const turnstileRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,61 +46,44 @@ const Contact = ({ socialLinks, email, location }) => {
     }));
   };
 
-  const handleCaptchaChange = (value) => {
-    setCaptchaValue(value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!captchaValue) {
+    if (!captchaToken) {
       setFormStatus({
-        message: "Please verify that you are not a robot",
+        message: "Please complete the verification",
         type: "error",
       });
       return;
     }
 
+    setSending(true);
     setFormStatus({ message: "Sending...", type: "info" });
 
-    const serviceId = import.meta.env.VITE_SERVICE_ID;
-    const templateId = import.meta.env.VITE_TEMPLATE_ID;
-    const userId = import.meta.env.VITE_EMAILJS_USER_ID;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, token: captchaToken }),
+      });
+      const result = await response.json().catch(() => ({}));
 
-    emailjs
-      .send(
-        serviceId,
-        templateId,
-        {
-          name: formData.name,
-          time: new Date().toLocaleString(),
-          email_id: formData.email,
-          message: formData.message,
-          "g-recaptcha-response": captchaValue,
-        },
-        userId
-      )
-      .then(
-        (result) => {
-          console.log("Success:", result.text);
-          setFormStatus({
-            message: "Message sent successfully!",
-            type: "success",
-          });
-          // Reset form
-          setFormData({ name: "", email: "", message: "" });
-          // Reset reCAPTCHA
-          recaptchaRef.current.reset();
-          setCaptchaValue(null);
-        },
-        (error) => {
-          console.error("Failed:", error.text);
-          setFormStatus({
-            message: "Failed to send message. Please try again.",
-            type: "error",
-          });
-        }
-      );
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message.");
+      }
+
+      setFormStatus({ message: "Message sent successfully!", type: "success" });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      setFormStatus({
+        message: err.message || "Failed to send message. Please try again.",
+        type: "error",
+      });
+    } finally {
+      turnstileRef.current?.reset();
+      setCaptchaToken(null);
+      setSending(false);
+    }
   };
 
   return (
@@ -151,14 +134,17 @@ const Contact = ({ socialLinks, email, location }) => {
               />
             </div>
             <div className="form-group recaptcha-container">
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                onChange={handleCaptchaChange}
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                options={{ theme: "dark" }}
+                onSuccess={setCaptchaToken}
+                onExpire={() => setCaptchaToken(null)}
+                onError={() => setCaptchaToken(null)}
               />
             </div>
-            <button type="submit" disabled={!captchaValue}>
-              Send Message
+            <button type="submit" disabled={!captchaToken || sending}>
+              {sending ? "Sending..." : "Send Message"}
             </button>
           </form>
 
