@@ -9,8 +9,7 @@ import {
   SiDart,
   SiFirebase,
   SiKubernetes,
-  SiDocker
-
+  SiDocker,
 } from "react-icons/si";
 import "../../styles/about.css";
 
@@ -27,8 +26,7 @@ const techIcons = {
   Git: <FaGit color="#f34f29" />,
   Strava: <FaStrava color="#fc4c02" />,
   Kubernetes: <SiKubernetes color="#326CE5" />,
-  Docker: <SiDocker color="#2496ED" />
-
+  Docker: <SiDocker color="#2496ED" />,
 };
 
 const DEFAULT_TECH_STACK = [
@@ -43,7 +41,7 @@ const DEFAULT_TECH_STACK = [
   "FireBase",
   "Git",
   "Kubernetes",
-  "Docker"
+  "Docker",
 ];
 
 const About = ({ techStack = DEFAULT_TECH_STACK }) => {
@@ -53,33 +51,31 @@ const About = ({ techStack = DEFAULT_TECH_STACK }) => {
       <div className="about-content">
         <div className="about-text">
           <p className="about-text-first">
-            Hi, I&apos;m a Computer Science major with a passion for Full Stack
-            Development. I specialize in building responsive, user-centric web
-            applications using a wide range of frontend and backend
-            technologies.
+            Hi! I&apos;m Rodrigo Loução, a Computer Science master's student at
+            NOVA FCT, specializing in Cloud Computing and Reliable Systems. I
+            build things for the web, for mobile, and increasingly, for the
+            infrastructure that holds it all together.
           </p>
           <br />
           <p>
-            When I started my degree, I knew nothing about programming, I just
-            had a strong curiosity for how things work. That curiosity soon
-            turned into a drive to create meaningful digital experiences. Since
-            then, I&apos;ve been on a constant journey of learning and growth,
-            always seeking challenges beyond the classroom and turning ideas
-            into real-world solutions.
+            I didn't start with a plan. I started with curiosity. When I began
+            my degree, I had never written a line of code, I just wanted to
+            understand how things worked. That curiosity became a habit, and
+            that habit became a craft. Since then, I've built websites for local
+            businesses, developed a peer-to-peer messaging app from scratch, and
+            explored everything from distributed systems to edge computing.s
+            Since then, I&apos;ve been on a constant journey of learning and
+            growth, always seeking challenges beyond the classroom and turning
+            ideas into real-world solutions.
           </p>
           <br />
-
-          <p>When I&apos;m not coding, you can find me:</p>
-          <ul className="about-activities">
-            <li>📚 Studying</li>
-            <li>🏋️ In the gym</li>
-            <li>🏃 Training for my next race</li>
-            <li>🚵‍♂️ Riding my bike through the mountain trails</li>
-          </ul>
+          <p>
+           Outside of the screen, I train for Ironman triathlons, ride mountain trails. I believe the same mindset that gets you through a long ride gets you through a hard problem: patience, consistency, and the refusal to stop before it's done.
+          </p>
         </div>
       </div>
 
-      <div className="tech-icons">
+      {/* <div className="tech-icons">
         {techStack.map((tech) =>
           techIcons[tech] ? (
             <span key={tech} className="tech-badge">
@@ -88,7 +84,7 @@ const About = ({ techStack = DEFAULT_TECH_STACK }) => {
             </span>
           ) : null
         )}
-      </div>
+      </div> */}
 
       <div className="strava-link">
         <a
@@ -108,6 +104,5 @@ const About = ({ techStack = DEFAULT_TECH_STACK }) => {
 About.propTypes = {
   techStack: PropTypes.arrayOf(PropTypes.string),
 };
-
 
 export default About;
