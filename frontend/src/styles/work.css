@@ -12,7 +12,7 @@
 }
 
 .case:not(:last-child) {
-  margin-bottom: clamp(40px, 9vh, 104px);
+  margin-bottom: clamp(10px, 2vh, 60px);
 }
 
 .case-inner {

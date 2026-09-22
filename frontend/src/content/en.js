@@ -116,7 +116,7 @@ const en = {
     scrub:
       "I train for Ironman triathlons. The mindset that gets you through a long ride gets you through a hard problem: patience, consistency, and refusing to stop before it's done.",
     body: [
-      "I didn't start with a plan, I started with curiosity. When I began my degree I had never written a line of code; I just wanted to understand how things worked. That curiosity became a habit, and the habit became a craft.",
+      "I didn't start with a plan, I started with curiosity. When I began my degree I had never written a line of code, I just wanted to understand how things worked. That curiosity became a habit, and the habit became a craft.",
       "Since then I've built websites and management systems for local businesses and a peer-to-peer messaging app, and I've gone deep on distributed systems and edge computing. Away from the screen, I ride mountain trails.",
     ],
     skillsTitle: "Tools I use",

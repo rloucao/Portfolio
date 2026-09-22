@@ -117,7 +117,7 @@ const pt = {
     scrub:
       "Treino para triatlos Ironman. A mentalidade que nos leva ao fim de um treino longo é a mesma que resolve um problema difícil: paciência, consistência e não parar antes de estar feito.",
     body: [
-      "Não comecei com um plano, comecei com curiosidade. Quando entrei na faculdade nunca tinha escrito uma linha de código; só queria perceber como as coisas funcionavam. Essa curiosidade tornou-se um hábito, e o hábito tornou-se um ofício.",
+      "Não comecei com um plano, comecei com curiosidade. Quando entrei na faculdade nunca tinha escrito uma linha de código, Só queria perceber como as coisas funcionavam. Essa curiosidade tornou-se um hábito, e o hábito tornou-se um ofício.",
       "Desde então construí sites e sistemas de gestão para negócios locais e uma aplicação de mensagens peer-to-peer, e aprofundei sistemas distribuídos e edge computing. Longe do ecrã, faço trilhos de BTT.",
     ],
     skillsTitle: "Ferramentas",

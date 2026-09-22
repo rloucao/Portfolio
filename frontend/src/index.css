@@ -118,7 +118,7 @@ p {
 }
 
 .section {
-  padding-block: clamp(80px, 11vw, 144px);
+  padding-block: clamp(60px, 9vw, 120px);
   scroll-margin-top: var(--nav-top);
 }
 
