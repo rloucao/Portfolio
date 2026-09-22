@@ -1,0 +1,153 @@
+.footer {
+  position: relative;
+  z-index: 0;
+  background: var(--sea-deep);
+  color: var(--foam);
+}
+
+/* The reveal: stuck to the bottom of the viewport behind <main>, which lifts
+   away at the end of the page. Only when the whole footer fits on screen —
+   a taller footer would have its top permanently hidden behind the page. */
+@media (min-height: 700px) {
+  .footer {
+    position: sticky;
+    bottom: 0;
+  }
+}
+
+/* Where the sand meets the water. */
+.shore {
+  position: relative;
+  height: 64px;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 48px;
+  animation: tide 20s linear infinite;
+}
+
+.wave-back {
+  top: 12px;
+  opacity: 0.45;
+  animation-duration: 29s;
+  animation-direction: reverse;
+}
+
+.wave-front {
+  top: 0;
+}
+
+.wave-sand {
+  fill: var(--sand);
+}
+
+.wave-foam {
+  fill: none;
+  stroke: var(--foam);
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes tide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.footer-inner {
+  display: grid;
+  gap: 28px;
+  justify-items: start;
+  padding-block: clamp(32px, 5vw, 56px) 32px;
+}
+
+.status.on-sea {
+  color: var(--foam);
+}
+
+.footer-title {
+  font-size: clamp(2.6rem, 8vw, 6.4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.btn-foam {
+  background: var(--foam);
+  color: var(--sea-deep);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  padding: 18px 30px;
+  overflow-wrap: anywhere;
+}
+
+.btn-foam:hover {
+  background: #fff;
+}
+
+.footer-bottom {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-top: 12px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(220, 238, 234, 0.2);
+  font-size: 0.95rem;
+}
+
+.footer-socials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-socials a,
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.footer-socials a:hover,
+.footer-top:hover {
+  opacity: 1;
+}
+
+.footer-socials .github svg {
+  color: var(--github-on-dark);
+}
+
+.footer-socials .linkedin svg {
+  color: var(--linkedin);
+}
+
+.footer-socials .strava svg {
+  color: var(--strava);
+}
+
+.footer small {
+  font: 400 0.75rem var(--mono);
+  opacity: 0.7;
+}
+
+.footer :focus-visible {
+  outline-color: var(--foam);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave {
+    animation: none;
+  }
+}

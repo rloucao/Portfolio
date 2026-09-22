@@ -5,9 +5,4 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ["**/*.JPEG", "**/*.jpeg", "**/*.jpg", "**/*.png", "**/*.svg"],
-  resolve: {
-    alias: {
-      "react-native": "react-native-web",
-    },
-  },
 });

@@ -1,64 +1,38 @@
-import { useState, useRef } from "react";
-import PropTypes from "prop-types";
-import "../../styles/contact.css";
+import { useRef, useState } from "react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { useLanguage } from "../../i18n/useLanguage";
+import { LINKS } from "../../content/projects";
+import "../../styles/contact.css";
 
-const icons = {
-  GitHub: <SiGithub color="#181717" />,
-  LinkedIn: <SiLinkedin color="#0A66C2" />,
-};
+const EMPTY_FORM = { name: "", email: "", message: "" };
 
-const SocialLink = ({ social }) => {
-  const { name, url } = social;
-  return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
-      {icons[name]}
-      <span>{name}</span>
-    </a>
-  );
-};
-
-SocialLink.propTypes = {
-  social: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-const Contact = ({ socialLinks, email, location }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+const Contact = () => {
+  const { t } = useLanguage();
+  const copy = t.contact;
+  const [formData, setFormData] = useState(EMPTY_FORM);
   const [captchaToken, setCaptchaToken] = useState(null);
-  const [formStatus, setFormStatus] = useState({ message: "", type: "" });
+  // Holds a key into the copy (e.g. "sent"), not the text itself, so the
+  // message follows a language switch.
+  const [status, setStatus] = useState({ key: "", type: "" });
   const [sending, setSending] = useState(false);
   const turnstileRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!captchaToken) {
-      setFormStatus({
-        message: "Please complete the verification",
-        type: "error",
-      });
+      setStatus({ key: "verify", type: "error" });
       return;
     }
 
     setSending(true);
-    setFormStatus({ message: "Sending...", type: "info" });
+    setStatus({ key: "sending", type: "info" });
 
     try {
       const response = await fetch("/api/contact", {
@@ -66,19 +40,12 @@ const Contact = ({ socialLinks, email, location }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, token: captchaToken }),
       });
-      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to send message.");
-      }
-
-      setFormStatus({ message: "Message sent successfully!", type: "success" });
-      setFormData({ name: "", email: "", message: "" });
-    } catch (err) {
-      setFormStatus({
-        message: err.message || "Failed to send message. Please try again.",
-        type: "error",
-      });
+      setStatus({ key: "sent", type: "success" });
+      setFormData(EMPTY_FORM);
+    } catch {
+      setStatus({ key: "failed", type: "error" });
     } finally {
       turnstileRef.current?.reset();
       setCaptchaToken(null);
@@ -87,137 +54,104 @@ const Contact = ({ socialLinks, email, location }) => {
   };
 
   return (
-    <div className="contact-container">
-      <h2>Contact Me</h2>
-      <div className="contact-content">
-        <div className="contact-form">
-          <form onSubmit={handleSubmit}>
-            {formStatus.message && (
-              <div className={`form-status ${formStatus.type}`}>
-                {formStatus.message}
-              </div>
-            )}
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                required
-              />
+    <section id="contact" className="section contact">
+      <div className="container contact-grid">
+        <div className="contact-info">
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h2 className="section-title">{copy.title}</h2>
+          <p className="section-lede">{copy.lede}</p>
+          <dl className="contact-details">
+            <div>
+              <dt>{copy.emailLabel}</dt>
+              <dd>
+                <a href={`mailto:${LINKS.email}`}>{LINKS.email}</a>
+              </dd>
             </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your.email@example.com"
-                required
-              />
+            <div>
+              <dt>{copy.locationLabel}</dt>
+              <dd>{copy.location}</dd>
             </div>
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="5"
-                placeholder="Your message here..."
-                required
-              />
+            <div>
+              <dt>{copy.elsewhere}</dt>
+              <dd className="contact-socials">
+                <a href={LINKS.github} target="_blank" rel="noopener noreferrer">
+                  <SiGithub aria-hidden="true" /> GitHub
+                </a>
+                <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
+                  <SiLinkedin aria-hidden="true" /> LinkedIn
+                </a>
+              </dd>
             </div>
-            <div className="form-group recaptcha-container">
-              <Turnstile
-                ref={turnstileRef}
-                siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                options={{ theme: "dark" }}
-                onSuccess={setCaptchaToken}
-                onExpire={() => setCaptchaToken(null)}
-                onError={() => setCaptchaToken(null)}
-              />
-            </div>
-            <button type="submit" disabled={!captchaToken || sending}>
-              {sending ? "Sending..." : "Send Message"}
+          </dl>
+        </div>
+
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <div className="field">
+            <label htmlFor="name">{copy.name}</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autoComplete="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder={copy.namePh}
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="email">{copy.email}</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder={copy.emailPh}
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="message">{copy.message}</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder={copy.messagePh}
+              required
+            />
+          </div>
+          <div className="field">
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+              options={{ theme: "light" }}
+              onSuccess={setCaptchaToken}
+              onExpire={() => setCaptchaToken(null)}
+              onError={() => setCaptchaToken(null)}
+            />
+          </div>
+          <div className="form-actions">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={!captchaToken || sending}
+            >
+              {sending ? copy.sending : copy.send}
             </button>
-          </form>
-
-          <div className="mobile-contact-info">
-            <div className="social-links">
-              <h3>Connect with me</h3>
-              <div className="social-icons">
-                {socialLinks.map((social, index) => (
-                  <SocialLink key={index} social={social} />
-                ))}
-              </div>
-            </div>
-            <div className="email">
-              <h3>Email</h3>
-              <p>{email}</p>
-            </div>
-            <div className="location">
-              <h3>Location</h3>
-              <p>{location}</p>
-            </div>
+            {status.key && (
+              <p className={`form-status ${status.type}`} role="status">
+                {copy[status.key]}
+              </p>
+            )}
           </div>
-        </div>
-
-        <div className="desktop-contact-info">
-          <div className="social-links">
-            <h3>Connect with me</h3>
-            <div className="social-icons">
-              {socialLinks.map((social, index) => (
-                <SocialLink key={index} social={social} />
-              ))}
-            </div>
-          </div>
-          <div className="email">
-            <h3>Email</h3>
-            <p>{email}</p>
-          </div>
-          <div className="location">
-            <h3>Location</h3>
-            <p>{location}</p>
-          </div>
-        </div>
+        </form>
       </div>
-    </div>
+    </section>
   );
-};
-
-Contact.propTypes = {
-  socialLinks: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      icon: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  email: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-};
-
-Contact.defaultProps = {
-  socialLinks: [
-    {
-      name: "GitHub",
-      url: "https://github.com/rloucao",
-      icon: "fab fa-github",
-    },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/rodrigo-lou%C3%A7%C3%A3o-347666268/",
-      icon: "fab fa-linkedin",
-    },
-  ],
-  email: "rodrigoloucao570@gmail.com",
-  location: "Lisbon, Portugal",
 };
 
 export default Contact;
