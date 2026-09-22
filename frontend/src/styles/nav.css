@@ -1,18 +1,46 @@
+/* Solid, not translucent: text sliding under a see-through bar reads as a
+   glitch, and iOS Safari tints the status-bar strip from a solid fixed
+   header's colour. */
 .nav {
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
-  height: var(--nav-h);
+  height: var(--nav-top);
+  padding-top: var(--safe-top);
   display: flex;
   align-items: center;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  background: var(--sand);
+  transition: height 0.35s var(--ease-out), box-shadow 0.3s;
 }
 
 .nav.is-scrolled {
-  background: color-mix(in srgb, var(--sand) 88%, transparent);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--line);
+}
+
+/* Scrolling down: just the name, in a slimmer bar. Scrolling up (or
+   tabbing into the nav) brings everything back. */
+.nav.is-compact {
+  height: calc(52px + var(--safe-top));
+}
+
+.nav-links,
+.nav-actions {
+  transition: opacity 0.25s, visibility 0.25s, translate 0.35s var(--ease-out);
+}
+
+.nav.is-compact .nav-links,
+.nav.is-compact .nav-actions {
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 -8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .nav-links,
+  .nav-actions {
+    transition: none;
+  }
 }
 
 .nav-inner {

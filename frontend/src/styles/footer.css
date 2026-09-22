@@ -62,7 +62,7 @@
   display: grid;
   gap: 28px;
   justify-items: start;
-  padding-block: clamp(32px, 5vw, 56px) 32px;
+  padding-block: clamp(32px, 5vw, 56px) calc(32px + env(safe-area-inset-bottom, 0px));
 }
 
 .status.on-sea {

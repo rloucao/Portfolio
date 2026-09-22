@@ -30,9 +30,13 @@ const useStickyOffsets = (stackRef) => {
     let frame = 0;
 
     const place = () => {
-      const nav = parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue("--nav-h"),
-      );
+      // Full nav height, including the strip under the iPhone status bar
+      // (the nav's top padding) — not its current height, which shrinks
+      // while scrolling down.
+      const navEl = document.querySelector(".nav");
+      const nav =
+        parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) +
+        (navEl ? parseFloat(getComputedStyle(navEl).paddingTop) : 0);
       cards.forEach((card, i) => {
         const preferred = nav + EDGE + i * STACK_STEP;
         const fits = window.innerHeight - card.offsetHeight - EDGE;
@@ -119,79 +123,85 @@ ProjectMedia.propTypes = {
   video: PropTypes.string,
 };
 
-// Stand-in artwork for a project that has no footage yet.
-const ChatPlaceholder = ({ label }) => (
-  <div className="chat-ph" aria-hidden="true">
-    <span className="chat-ph-label">{label}</span>
-    <span className="bubble" style={{ width: "58%" }} />
-    <span className="bubble me" style={{ width: "44%" }} />
-    <span className="bubble" style={{ width: "70%" }} />
-    <span className="bubble me" style={{ width: "36%" }} />
-  </div>
-);
-
-ChatPlaceholder.propTypes = {
-  label: PropTypes.string.isRequired,
-};
-
 const CaseCard = ({ project, index }) => {
   const { t } = useLanguage();
+  const [open, setOpen] = useState(false);
   const copy = t.work.projects[project.id];
   const title = project.title ?? copy.title;
   const testing = project.status === "testing";
+  const detailsId = `case-details-${project.id}`;
+  const hasDetails = copy.points.length > 0 || project.stack.length > 0;
 
   return (
     <>
       {/* Zero-height marker at the card's natural position. A stuck card
           reports its stuck position, so triggers are measured from here. */}
       <div className="case-marker" aria-hidden="true" />
-      <article className="case" style={{ "--i": index }}>
+      <article className={`case${open ? " is-open" : ""}`} style={{ "--i": index }}>
         <div className="case-inner">
           <div className="case-text">
             <p className="case-tag">
               {copy.tag}
               {testing && <span className="badge">{t.work.testing}</span>}
             </p>
-            <h3>{title}</h3>
+            <div className="case-title-row">
+              <h3>{title}</h3>
+              {project.url && (
+                <a
+                  className="link-arrow case-visit"
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t.work.visit} <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
             <p className="case-summary">{copy.summary}</p>
 
-            {copy.points.length > 0 && (
-              <div className="case-built">
-                <h4 className="label">{t.work.built}</h4>
-                <ul className="case-points">
-                  {copy.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
+            {/* Always shown on desktop; on phones it folds away behind the
+                toggle below so each card stays about a screen tall. */}
+            {hasDetails && (
+              <div className="case-details" id={detailsId}>
+                {copy.points.length > 0 && (
+                  <div className="case-built">
+                    <h4 className="label">{t.work.built}</h4>
+                    <ul className="case-points">
+                      {copy.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {project.stack.length > 0 && (
+                  <ul className="case-stack" aria-label={t.work.stack}>
+                    {project.stack.map((tech) => (
+                      <li key={tech}>{tech}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
             )}
 
-            {project.stack.length > 0 && (
-              <ul className="case-stack" aria-label={t.work.stack}>
-                {project.stack.map((tech) => (
-                  <li key={tech}>{tech}</li>
-                ))}
-              </ul>
-            )}
-
-            {project.url && (
-              <a
-                className="link-arrow"
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
+            {hasDetails && (
+              <button
+                type="button"
+                className="case-toggle"
+                aria-expanded={open}
+                aria-controls={detailsId}
+                onClick={() => setOpen((value) => !value)}
               >
-                {t.work.visit} <span aria-hidden="true">↗</span>
-              </a>
+                {open ? t.work.less : t.work.more}
+                <span className="case-toggle-icon" aria-hidden="true">
+                  ↓
+                </span>
+              </button>
             )}
           </div>
 
-          <div className="case-media">
-            {project.video || project.image ? (
-              <ProjectMedia title={title} image={project.image} video={project.video} />
-            ) : (
-              <ChatPlaceholder label={t.work.testing} />
-            )}
+          <div className={`case-media${project.portrait ? " is-portrait" : ""}`}>
+            <ProjectMedia title={title} image={project.image} video={project.video} />
           </div>
 
           <div className="case-shade" aria-hidden="true" />
@@ -206,8 +216,9 @@ CaseCard.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string,
     status: PropTypes.string,
-    image: PropTypes.string,
+    image: PropTypes.string.isRequired,
     video: PropTypes.string,
+    portrait: PropTypes.bool,
     url: PropTypes.string,
     stack: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,

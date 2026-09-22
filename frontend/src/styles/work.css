@@ -8,7 +8,7 @@
    the plain stacked offset. */
 .case {
   position: sticky;
-  top: var(--stick, calc(var(--nav-h) + 16px + var(--i) * 18px));
+  top: var(--stick, calc(var(--nav-top) + 16px + var(--i) * 18px));
 }
 
 .case:not(:last-child) {
@@ -21,7 +21,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: center;
-  min-height: min(600px, calc(100svh - var(--nav-h) - 110px));
+  min-height: min(600px, calc(100svh - var(--nav-top) - 110px));
   padding: clamp(20px, 3vw, 40px);
   background: var(--paper);
   border: 1px solid var(--line);
@@ -55,10 +55,63 @@
   letter-spacing: 0.04em;
 }
 
+/* The link stays beside the name; a long name wraps within its own column. */
+.case-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.case-title-row h3 {
+  min-width: 0;
+}
+
 .case h3 {
   font-size: clamp(1.9rem, 3.2vw, 2.7rem);
   font-weight: 700;
   letter-spacing: -0.025em;
+}
+
+.case-visit {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.case-details {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+
+/* Only exists on phones (see below); desktop always shows the details. */
+.case-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: 500 0.74rem var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.case-toggle:hover {
+  border-color: var(--ink);
+}
+
+.case-toggle-icon {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.case.is-open .case-toggle-icon {
+  transform: rotate(180deg);
 }
 
 .case-summary {
@@ -127,6 +180,29 @@
   object-fit: cover;
 }
 
+/* Phone screen recordings: the whole screen, upright, on a dark stage that
+   runs the full height of the card on desktop. */
+.case-media.is-portrait {
+  position: relative;
+  align-self: stretch;
+  aspect-ratio: auto;
+  min-height: 360px;
+  background: var(--sea-deep);
+}
+
+.case-media.is-portrait img,
+.case-media.is-portrait video {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: auto;
+  height: 88%;
+  aspect-ratio: 480 / 1044;
+  translate: -50% 0;
+  border-radius: clamp(10px, 1.6vw, 20px);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.6);
+}
+
 /* Darkens a card as the next one covers it (driven from Work.jsx). */
 .case-shade {
   position: absolute;
@@ -137,52 +213,52 @@
   pointer-events: none;
 }
 
-/* Placeholder art for a project without footage yet. */
-.chat-ph {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  padding: clamp(20px, 4vw, 40px);
-  background: var(--sea-deep);
-}
-
-.chat-ph-label {
-  margin-bottom: 8px;
-  font: 500 0.72rem var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--foam);
-  opacity: 0.7;
-}
-
-.bubble {
-  height: 34px;
-  border-radius: 18px 18px 18px 6px;
-  background: rgba(220, 238, 234, 0.14);
-}
-
-.bubble.me {
-  align-self: flex-end;
-  border-radius: 18px 18px 6px 18px;
-  background: var(--sea);
-}
-
+/* Phones: compact cards. Media, name and summary up front; the build list
+   and stack fold away behind a toggle. */
 @media (max-width: 899px) {
   .case-inner {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
     min-height: 0;
+    padding: 14px 14px 18px;
+    border-radius: 20px;
   }
 
   .case-text {
-    gap: 14px;
+    gap: 12px;
+    padding-inline: 4px;
   }
 
-  .case-media {
+  .case-media,
+  .case-media.is-portrait {
     order: -1;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2 / 1;
+    min-height: 0;
+    border-radius: 12px;
+  }
+
+  .case h3 {
+    font-size: 1.6rem;
+  }
+
+  .case-visit {
+    font-size: 0.95rem;
+  }
+
+  .case:not(.is-open) .case-summary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .case:not(.is-open) .case-details {
+    display: none;
+  }
+
+  .case-toggle {
+    display: inline-flex;
   }
 
   .case-points {

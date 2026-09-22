@@ -25,6 +25,10 @@
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 
   --nav-h: 68px;
+  /* With viewport-fit=cover the page runs under the iPhone status bar; the
+     nav grows by this much so it covers that strip too. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --nav-top: calc(var(--nav-h) + var(--safe-top));
   --gutter: clamp(16px, 4vw, 40px);
   --max: 1180px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -109,12 +113,13 @@ p {
   width: 100%;
   max-width: var(--max);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px))
+    max(var(--gutter), env(safe-area-inset-right, 0px));
 }
 
 .section {
   padding-block: clamp(80px, 11vw, 144px);
-  scroll-margin-top: var(--nav-h);
+  scroll-margin-top: var(--nav-top);
 }
 
 .section-head {

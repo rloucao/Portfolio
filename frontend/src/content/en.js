@@ -30,6 +30,8 @@ const en = {
     stack: "Stack",
     visit: "Visit site",
     testing: "In testing",
+    more: "Show details",
+    less: "Hide details",
     projects: {
       messenger: {
         title: "Hoppin",

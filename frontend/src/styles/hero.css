@@ -1,5 +1,5 @@
 .hero {
-  padding-top: calc(var(--nav-h) + clamp(48px, 9vw, 120px));
+  padding-top: calc(var(--nav-top) + clamp(48px, 9vw, 120px));
   padding-bottom: clamp(56px, 8vw, 104px);
 }
 

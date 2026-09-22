@@ -30,13 +30,23 @@ const pt = {
     stack: "Tecnologias",
     visit: "Ver site",
     testing: "Em testes",
+    more: "Ver detalhes",
+    less: "Esconder detalhes",
     projects: {
       messenger: {
         title: "Hoppin",
         tag: "Mobile App · Sistemas distribuídos",
         summary:
-          "Uma aplicação de mensagens peer-to-peer que estou a construir de raiz. Está em fase de testes, e o caso de estudo completo fica aqui quando for lançada.",
-        points: [],
+          "Um mensageiro para iOS com encriptação ponta a ponta que continua a funcionar quando a internet falha. As mensagens vão de telemóvel para telemóvel por Wi-Fi, saltam entre telemóveis próximos por Bluetooth e, em último caso, passam por um relay que só guarda envelopes selados que não consegue ler. Construído a partir do protocolo: app, servidor e site.",
+        points: [
+          "Encriptação de mensagens feita de raiz com CryptoKit",
+          "Entrega direta entre telemóveis na rede local, com Bonjour e Wi-Fi peer-to-peer",
+          "Uma rede mesh por Bluetooth: as mensagens saltam entre telemóveis próximos, seladas numa camada exterior anónima",
+          "Um relay e uma autoridade de certificação em Python",
+          "Fixação de chaves no primeiro uso, com números de segurança, verificação por QR e avisos de mudança de chave que bloqueiam o envio até o utilizador aceitar",
+          "Tradução automática no dispositivo para cada conversa, sugestões de escrita em quatro teclados e um fundo fluido animado",
+          "Mais de 270 testes em Swift e Python, corridos contra fixtures partilhadas do protocolo para que os dois lados concordem byte a byte",
+        ],
       },
       mbd: {
         tag: "Site · Hotelaria",

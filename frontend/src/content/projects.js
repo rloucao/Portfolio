@@ -2,9 +2,12 @@
 // en.js / pt.js under `work.projects[id]`, so both languages stay in sync.
 export const PROJECTS = [
   {
-    // TODO: add name, stack, media and links once the app ships.
+    // TODO: add a url once the app ships. Name and copy live in en.js / pt.js.
     id: "messenger",
     status: "testing",
+    image: "/videos/hoppin.jpg",
+    video: "/videos/hoppin.mp4",
+    portrait: true, // phone screen recording
     stack: ["Swift", "Next.js 16", "TypeScript", "Tailwind CSS v4"],
   },
   {
