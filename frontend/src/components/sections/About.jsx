@@ -27,7 +27,7 @@ const ScrubText = ({ text }) => {
         const split = SplitText.create(ref.current, { type: "words", tag: "span" });
         gsap.fromTo(
           split.words,
-          { opacity: 0.18 },
+          { opacity: 0 },
           {
             opacity: 1,
             ease: "none",
