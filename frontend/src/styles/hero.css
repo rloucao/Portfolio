@@ -38,7 +38,7 @@
   border-radius: 50%;
   overflow: hidden;
   background: var(--sand-deep);
-  box-shadow: 0 0 0 2px var(--sand), 0 0 0 4px var(--sea);
+  box-shadow: 0px 0px 8px rgb(25, 124, 135);
   cursor: zoom-in;
   transition: transform 0.2s var(--ease-out);
 }
