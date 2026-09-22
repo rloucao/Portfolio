@@ -248,13 +248,13 @@ const Work = () => {
             .timeline({
               scrollTrigger: {
                 trigger: markers[i + 1],
-                start: "top bottom",
+                start: "top center",
                 end: () => `top ${stuckAt()}px`,
                 scrub: true,
                 invalidateOnRefresh: true,
               },
             })
-            .to(card.querySelector(".case-inner"), { scale: 0.92, ease: "none" }, 0)
+            .to(card.querySelector(".case-inner"), { scale: 0.70, ease: "none" }, 0)
             .to(card.querySelector(".case-shade"), { opacity: 1, ease: "none" }, 0);
         });
       });
