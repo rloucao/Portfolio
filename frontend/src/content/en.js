@@ -1,6 +1,6 @@
 const en = {
   meta: {
-    title: "Rodrigo Loução — Full-stack Developer",
+    title: "Rodrigo Loução: Full-stack Developer",
     description:
       "Full-stack developer in Lisbon building web apps, mobile apps and cloud infrastructure. Open to freelance work",
   },
@@ -153,7 +153,7 @@ const en = {
   },
   contact: {
     eyebrow: "Contact",
-    title: "Have a project?",
+    title: "Have a project in mind?",
     lede: "Send me a message here, or email me directly.",
     name: "Name",
     email: "Email",
