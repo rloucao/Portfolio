@@ -7,7 +7,8 @@ export const PROJECTS = [
     status: "testing",
     image: "/videos/hoppin.jpg",
     video: "/videos/hoppin.mp4",
-    portrait: true, // phone screen recording
+    url: "https://hoppin.chat",
+    // portrait: true, // phone screen recording
     stack: ["Swift", "Next.js 16", "TypeScript", "Tailwind CSS v4"],
   },
   {
