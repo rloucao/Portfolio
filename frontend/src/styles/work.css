@@ -1,45 +1,58 @@
-.case-marker {
-  height: 0;
+/* ── Index ───────────────────────────────────────────────────────
+   A numbered list of project names. Each name opens its write-up below it.
+   With a mouse, hovering a name floats its video beside the cursor; on touch
+   screens the row in the middle of the screen lights up and its video slides
+   open instead. */
+.work-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
 }
 
-/* Plain block flow (not grid/flex) so each zero-height marker lands exactly
-   on the top edge of the card after it. --stick is set per card by Work.jsx
-   so a card taller than the screen still gets read in full; the fallback is
-   the plain stacked offset. */
-.case {
-  position: sticky;
-  top: var(--stick, calc(var(--nav-top) + 16px + var(--i) * 18px));
+.work-row {
+  border-top: 1px solid var(--line);
+  transition: opacity 0.35s var(--ease-out);
 }
 
-.case:not(:last-child) {
-  margin-bottom: clamp(10px, 2vh, 60px);
+.work-row-head {
+  margin: 0;
+  font: inherit;
 }
 
-.case-inner {
-  position: relative;
+.work-row-head button {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-  gap: clamp(24px, 4vw, 56px);
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto 2rem;
   align-items: center;
-  min-height: min(600px, calc(100svh - var(--nav-top) - 110px));
-  padding: clamp(20px, 3vw, 40px);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  transform-origin: 50% 0;
-  overflow: hidden;
+  gap: 16px;
+  width: 100%;
+  padding: clamp(18px, 2.4vw, 28px) 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
-.case-text {
-  display: grid;
-  gap: 18px;
-  justify-items: start;
+.work-row-num {
+  font: 400 0.8rem var(--mono);
+  color: var(--muted);
 }
 
-.case-tag {
+.work-row-title {
+  font: 700 clamp(2.2rem, 5.4vw, 4.4rem) / 1.02 var(--display);
+  letter-spacing: -0.03em;
+  transition:
+    color 0.3s var(--ease-out),
+    translate 0.45s var(--ease-out);
+}
+
+.work-row-tag {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
   font: 500 0.74rem var(--mono);
   letter-spacing: 0.08em;
@@ -55,143 +68,94 @@
   letter-spacing: 0.04em;
 }
 
-/* The link stays beside the name; a long name wraps within its own column. */
-.case-title-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-}
-
-.case-title-row h3 {
-  min-width: 0;
-}
-
-.case h3 {
-  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-.case-visit {
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.case-details {
-  display: grid;
-  gap: 18px;
-  justify-items: start;
-}
-
-/* Only exists on phones (see below); desktop always shows the details. */
-.case-toggle {
-  display: none;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--ink);
-  font: 500 0.74rem var(--mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.case-toggle:hover {
-  border-color: var(--ink);
-}
-
-.case-toggle-icon {
-  transition: transform 0.25s var(--ease-out);
-}
-
-.case.is-open .case-toggle-icon {
-  transform: rotate(180deg);
-}
-
-.case-summary {
-  color: var(--muted);
-  max-width: 48ch;
-}
-
-.case-built {
-  display: grid;
-  gap: 10px;
-}
-
-.case-points {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 6px;
-  font-size: 0.98rem;
-}
-
-.case-points li {
+/* A plus drawn from two bars; the upright one folds away into a minus. */
+.work-row-icon {
   position: relative;
-  padding-left: 22px;
+  justify-self: end;
+  width: 16px;
+  height: 16px;
 }
 
-.case-points li::before {
+.work-row-icon::before,
+.work-row-icon::after {
   content: "";
   position: absolute;
+  top: 50%;
   left: 0;
-  top: 0.8em;
-  width: 12px;
+  width: 100%;
   height: 2px;
+  margin-top: -1px;
   border-radius: 2px;
-  background: var(--sea);
+  background: currentColor;
+  transition: rotate 0.35s var(--ease-out);
 }
 
-.case-stack {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+.work-row-icon::after {
+  rotate: 90deg;
 }
 
-.case-stack li {
-  padding: 4px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font: 400 0.72rem var(--mono);
-  color: var(--muted);
+.work-row.is-open .work-row-icon::after {
+  rotate: 0deg;
 }
 
-.case-media {
+.work-row.is-open .work-row-title {
+  color: var(--sea);
+}
+
+/* Collapsing regions: a one-row grid animates from 0fr to 1fr, so the height
+   eases open without measuring anything. */
+.work-row-reveal,
+.work-row-fold {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease-out);
+}
+
+.work-row-body,
+.work-row-fold > * {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.work-row.is-open .work-row-reveal,
+.work-row.is-open .work-row-fold {
+  grid-template-rows: 1fr;
+}
+
+.work-row-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+  padding-left: calc(3.5rem + 16px);
+}
+
+.work-row-media {
+  order: 2;
   aspect-ratio: 1280 / 806;
+  margin-bottom: clamp(24px, 3vw, 40px);
   border-radius: 14px;
   overflow: hidden;
   background: var(--sand-deep);
+  box-shadow: 0 24px 40px -28px rgba(0, 0, 0, 0.5);
 }
 
-.case-media img,
-.case-media video {
+.work-row-media img,
+.work-row-media video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Phone screen recordings: the whole screen, upright, on a dark stage that
-   runs the full height of the card on desktop. */
-.case-media.is-portrait {
+/* Phone screen recordings: the whole screen, upright, on a dark stage. */
+.work-row-media.is-portrait {
   position: relative;
-  align-self: stretch;
-  aspect-ratio: auto;
-  min-height: 360px;
   background: var(--sea-deep);
 }
 
-.case-media.is-portrait img,
-.case-media.is-portrait video {
+.work-row-media.is-portrait img,
+.work-row-media.is-portrait video {
   position: absolute;
   top: 6%;
   left: 50%;
@@ -203,65 +167,217 @@
   box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.6);
 }
 
-/* Darkens a card as the next one covers it (driven from Work.jsx). */
-.case-shade {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: rgba(15, 59, 64, 0.3);
-  opacity: 0;
-  pointer-events: none;
+.work-row-details {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
 }
 
-/* Phones: compact cards. Media, name and summary up front; the build list
-   and stack fold away behind a toggle. */
+/* Spacing under the write-up is a margin, not padding: the fold clips
+   margins away when closed, but padding would leave a line of text showing. */
+.work-row-details > :last-child {
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.work-row-summary {
+  color: var(--muted);
+  max-width: 48ch;
+}
+
+.work-row-built {
+  display: grid;
+  gap: 10px;
+}
+
+.work-row-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.98rem;
+}
+
+.work-row-points li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.work-row-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--sea);
+}
+
+.work-row-stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.work-row-stack li {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: 400 0.72rem var(--mono);
+  color: var(--muted);
+}
+
+/* ── With a mouse ──────────────────────────────────────────────── */
+
+/* Hovering one name fades the rest back. */
+.work-index.is-hover:hover .work-row:not(:hover):not(.is-open) {
+  opacity: 0.35;
+}
+
+.work-index.is-hover .work-row:hover .work-row-title {
+  color: var(--sea);
+  translate: 14px 0;
+}
+
+.work-row-head button:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Positioned by Work.jsx at the cursor; never catches the pointer. */
+.work-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: clamp(280px, 30vw, 440px);
+  aspect-ratio: 1280 / 806;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.work-preview-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--sand-deep);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.work-preview-layer.is-shown {
+  opacity: 1;
+}
+
+.work-preview-layer img,
+.work-preview-layer video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-preview-cta {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--sea);
+  color: var(--foam);
+  font: 500 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Touch screens ─────────────────────────────────────────────── */
+
+/* Rows wait faded until they reach the middle of the screen. */
+.work-index.is-touch .work-row:not(.is-active):not(.is-open) {
+  opacity: 0.45;
+}
+
+.work-index.is-touch .work-row.is-active .work-row-title {
+  color: var(--sea);
+}
+
+/* Once scrolled to, a row keeps its video open; the write-up still waits for
+   a tap. */
+.work-index.is-touch .work-row.is-revealed .work-row-reveal {
+  grid-template-rows: 1fr;
+}
+
+/* Narrow screens: one column, the tag tucked under the name, video first. */
 @media (max-width: 899px) {
-  .case-inner {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    min-height: 0;
-    padding: 14px 14px 18px;
-    border-radius: 20px;
+  .work-row-head button {
+    grid-template-columns: 1.75rem minmax(0, 1fr) 1.5rem;
+    grid-template-areas:
+      "num title icon"
+      ". tag .";
+    column-gap: 12px;
+    row-gap: 6px;
+    align-items: baseline;
+    padding: 18px 0;
   }
 
-  .case-text {
-    gap: 12px;
-    padding-inline: 4px;
+  .work-row-num {
+    grid-area: num;
   }
 
-  .case-media,
-  .case-media.is-portrait {
-    order: -1;
-    aspect-ratio: 2 / 1;
-    min-height: 0;
+  .work-row-title {
+    grid-area: title;
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .work-row-tag {
+    grid-area: tag;
+    justify-content: flex-start;
+    font-size: 0.68rem;
+  }
+
+  .work-row-icon {
+    grid-area: icon;
+    align-self: center;
+  }
+
+  .work-row-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-left: calc(1.75rem + 12px);
+  }
+
+  .work-row-media {
+    order: 0;
+    margin-bottom: 18px;
     border-radius: 12px;
   }
 
-  .case h3 {
-    font-size: 1.6rem;
+  .work-row-media.is-portrait {
+    aspect-ratio: 4 / 5;
   }
 
-  .case-visit {
+  .work-row-points {
     font-size: 0.95rem;
   }
+}
 
-  .case:not(.is-open) .case-summary {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    overflow: hidden;
-  }
-
-  .case:not(.is-open) .case-details {
-    display: none;
-  }
-
-  .case-toggle {
-    display: inline-flex;
-  }
-
-  .case-points {
-    font-size: 0.95rem;
+@media (prefers-reduced-motion: reduce) {
+  .work-row,
+  .work-row-title,
+  .work-row-reveal,
+  .work-row-fold,
+  .work-row-icon::before,
+  .work-row-icon::after {
+    transition: none;
   }
 }

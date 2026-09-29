@@ -10,7 +10,11 @@
   display: flex;
   align-items: center;
   background: var(--sand);
-  transition: height 0.35s var(--ease-out), box-shadow 0.3s;
+  transition:
+    height 0.35s var(--ease-out),
+    box-shadow 0.3s,
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .nav.is-scrolled {
@@ -24,8 +28,12 @@
 }
 
 .nav-links,
-.nav-actions {
-  transition: opacity 0.25s, visibility 0.25s, translate 0.35s var(--ease-out);
+.nav-actions,
+.nav-status {
+  transition:
+    opacity 0.25s,
+    visibility 0.25s,
+    translate 0.35s var(--ease-out);
 }
 
 .nav.is-compact .nav-links,
@@ -35,19 +43,24 @@
   translate: 0 -8px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .nav,
-  .nav-links,
-  .nav-actions {
-    transition: none;
-  }
+/* The status line folds away with the rest; the name stays. */
+.nav.is-compact .nav-status {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
 }
 
 .nav-inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 24px;
+}
+
+.nav-brand {
+  display: grid;
+  gap: 2px;
+  justify-items: start;
 }
 
 .nav-name {
@@ -57,26 +70,111 @@
   white-space: nowrap;
 }
 
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  font: 500 0.64rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.nav-status time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* A slow pulse: someone's actually here. */
+.nav-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3aa37a;
+  box-shadow: 0 0 0 3px rgba(58, 163, 122, 0.2);
+  animation: nav-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes nav-pulse {
+  50% {
+    box-shadow: 0 0 0 5px rgba(58, 163, 122, 0.08);
+  }
+}
+
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: clamp(20px, 2.6vw, 36px);
 }
 
 .nav-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding-block: 6px;
   font-size: 0.95rem;
   color: var(--muted);
   text-decoration: none;
   transition: color 0.2s;
 }
 
+.nav-num {
+  font: 500 0.58rem var(--mono);
+  color: var(--sea);
+  translate: 0 1px;
+}
+
+/* An underline that grows from the left under the current section, and
+   hints on hover. */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--sea);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
 .nav-links a:hover {
   color: var(--ink);
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(0.35);
+}
+
+.nav-links a[aria-current] {
+  color: var(--ink);
+}
+
+.nav-links a[aria-current]::after {
+  transform: scaleX(1);
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
+}
+
+/* How far down the page the reader is, along the bar's bottom edge. */
+.nav-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--sea);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
 }
 
 .lang-switch {
@@ -94,7 +192,9 @@
   color: var(--muted);
   font: 500 0.72rem var(--mono);
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .lang-switch button[aria-pressed="true"] {
@@ -102,14 +202,280 @@
   color: var(--sand);
 }
 
-@media (max-width: 800px) {
-  .nav-links {
+/* ── Menu button (phones) ─────────────────────────────────────── */
+
+.nav-menu-button {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  justify-self: end;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: 500 0.7rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+/* Two bars that cross into an X. */
+.nav-burger {
+  position: relative;
+  width: 16px;
+  height: 10px;
+}
+
+.nav-burger::before,
+.nav-burger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    top 0.3s var(--ease-out),
+    rotate 0.3s var(--ease-out);
+}
+
+.nav-burger::before {
+  top: 1px;
+}
+
+.nav-burger::after {
+  top: calc(100% - 2.5px);
+}
+
+.nav.is-menu-open .nav-burger::before,
+.nav.is-menu-open .nav-burger::after {
+  top: calc(50% - 0.75px);
+}
+
+.nav.is-menu-open .nav-burger::before {
+  rotate: 45deg;
+}
+
+.nav.is-menu-open .nav-burger::after {
+  rotate: -45deg;
+}
+
+/* With the menu open the bar sits on the menu's colour. */
+.nav.is-menu-open {
+  background: transparent;
+  box-shadow: none;
+  color: var(--foam);
+}
+
+.nav.is-menu-open .nav-menu-button {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.nav.is-menu-open .nav-progress {
+  opacity: 0;
+}
+
+/* ── Full-screen menu (phones) ────────────────────────────────── */
+
+html.scroll-locked {
+  overflow: hidden;
+}
+
+/* Opens as a circle growing out of the menu button. */
+.nav-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  display: flex;
+  padding-top: var(--nav-top);
+  background: var(--sea-deep);
+  color: var(--foam);
+  clip-path: circle(0 at calc(100% - 56px) calc(var(--safe-top) + var(--nav-h) / 2));
+  visibility: hidden;
+  transition:
+    clip-path 0.55s var(--ease-out),
+    visibility 0s 0.55s;
+}
+
+.nav-menu.is-open {
+  clip-path: circle(150% at calc(100% - 56px) calc(var(--safe-top) + var(--nav-h) / 2));
+  visibility: visible;
+  transition:
+    clip-path 0.7s var(--ease-out),
+    visibility 0s;
+}
+
+.nav-menu-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  width: 100%;
+  padding-block: 24px calc(28px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+}
+
+.nav-menu-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.nav-menu-links li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.nav-menu-links a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  font: 700 clamp(2.6rem, 12vw, 3.6rem) / 1 var(--display);
+  letter-spacing: -0.03em;
+  color: var(--foam);
+  text-decoration: none;
+}
+
+.nav-menu-links .nav-num {
+  width: 20px;
+  font-size: 0.72rem;
+  color: #9fc5c0;
+}
+
+/* The section you're in gets a small marker after its name. */
+.nav-menu-links a[aria-current]::after {
+  content: "";
+  align-self: center;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #6fc3b8;
+}
+
+/* Links and footer rise in one after another as the circle opens. */
+.nav-menu-links li,
+.nav-menu-foot {
+  opacity: 0;
+  translate: 0 24px;
+  transition:
+    opacity 0.3s,
+    translate 0.3s var(--ease-out);
+}
+
+.nav-menu.is-open .nav-menu-links li,
+.nav-menu.is-open .nav-menu-foot {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.5s calc(0.15s + var(--i) * 0.06s),
+    translate 0.6s var(--ease-out) calc(0.15s + var(--i) * 0.06s);
+}
+
+.nav-menu-foot {
+  display: grid;
+  gap: 20px;
+}
+
+.nav-menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-menu-label {
+  font: 500 0.7rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9fc5c0;
+}
+
+.nav-menu .lang-switch {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.nav-menu .lang-switch button {
+  color: #9fc5c0;
+}
+
+.nav-menu .lang-switch button[aria-pressed="true"] {
+  background: var(--foam);
+  color: var(--sea-deep);
+}
+
+.nav-menu-social {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu-social a {
+  font: 500 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9fc5c0;
+  text-decoration: none;
+}
+
+.nav-menu-cta {
+  justify-content: center;
+  width: 100%;
+  padding-block: 17px;
+  background: var(--foam);
+  color: var(--sea-deep);
+}
+
+/* ── Sizes ────────────────────────────────────────────────────── */
+
+/* Mid-width: drop the status line so the links keep their room. */
+@media (max-width: 1024px) {
+  .nav-status {
     display: none;
   }
 }
 
-@media (max-width: 400px) {
-  .nav-cta {
+@media (max-width: 800px) {
+  .nav-inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav-links,
+  .nav-actions {
     display: none;
+  }
+
+  .nav-menu-button {
+    display: inline-flex;
+  }
+}
+
+/* The menu only exists on phones. */
+@media (min-width: 801px) {
+  .nav-menu {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .nav-links,
+  .nav-actions,
+  .nav-status,
+  .nav-links a::after,
+  .nav-burger::before,
+  .nav-burger::after,
+  .nav-menu,
+  .nav-menu.is-open,
+  .nav-menu-links li,
+  .nav-menu-foot,
+  .nav-menu.is-open .nav-menu-links li,
+  .nav-menu.is-open .nav-menu-foot {
+    transition: none;
+  }
+
+  .nav-dot {
+    animation: none;
   }
 }

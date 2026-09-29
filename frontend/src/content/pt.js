@@ -12,6 +12,11 @@ const pt = {
     process: "Processo",
     contact: "Contacto",
     cta: "Falar comigo",
+    available: "Disponível",
+    city: "Lisboa",
+    menu: "Menu",
+    close: "Fechar",
+    language: "Língua",
   },
   hero: {
     eyebrow: "Programador full-stack · Lisboa",
@@ -30,8 +35,7 @@ const pt = {
     stack: "Tecnologias",
     visit: "Ver site",
     testing: "Em testes",
-    more: "Ver detalhes",
-    less: "Esconder detalhes",
+    view: "Ver",
     projects: {
       messenger: {
         title: "Hoppin",

@@ -12,6 +12,11 @@ const en = {
     process: "Process",
     contact: "Contact",
     cta: "Get in touch",
+    available: "Available",
+    city: "Lisbon",
+    menu: "Menu",
+    close: "Close",
+    language: "Language",
   },
   hero: {
     eyebrow: "Full-stack developer · Lisbon",
@@ -30,8 +35,7 @@ const en = {
     stack: "Stack",
     visit: "Visit site",
     testing: "In testing",
-    more: "Show details",
-    less: "Hide details",
+    view: "View",
     projects: {
       messenger: {
         title: "Hoppin",

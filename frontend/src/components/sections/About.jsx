@@ -35,7 +35,7 @@ const ScrubText = ({ text }) => {
             scrollTrigger: {
               trigger: ref.current,
               start: "top 80%",
-              end: "bottom 45%",
+              end: "bottom 60%",
               scrub: true,
             },
           },

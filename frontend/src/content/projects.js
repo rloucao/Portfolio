@@ -8,7 +8,6 @@ export const PROJECTS = [
     image: "/videos/hoppin.jpg",
     video: "/videos/hoppin.mp4",
     url: "https://hoppin.chat",
-    // portrait: true, // phone screen recording
     stack: ["Swift", "Next.js 16", "TypeScript", "Tailwind CSS v4"],
   },
   {
