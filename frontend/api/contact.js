@@ -8,7 +8,7 @@ const MAX_LENGTHS = { name: 100, email: 254, message: 5000 };
 // onboarding@resend.dev works without domain verification but can only deliver
 // to your own Resend account address — fine until rloucao.dev is verified.
 const FROM = process.env.MAIL_FROM ?? "Portfolio <onboarding@resend.dev>";
-const TO = process.env.MAIL_TO ?? "rodrigoloucao570@gmail.com";
+const TO = process.env.MAIL_TO ?? "contact@rloucao.dev";
 
 const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 

@@ -37,7 +37,7 @@ export const PROJECTS = [
 ];
 
 export const LINKS = {
-  email: "rodrigoloucao570@gmail.com",
+  email: "contact@rloucao.dev",
   github: "https://github.com/rloucao",
   linkedin: "https://www.linkedin.com/in/rodrigo-lou%C3%A7%C3%A3o-347666268/",
   strava: "https://www.strava.com/athletes/142855329",
