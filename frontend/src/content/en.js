@@ -129,6 +129,7 @@ const en = {
       { group: "Backend", items: ["Node.js", "Java · Spring Boot", "PostgreSQL", "Prisma", "Supabase", "MongoDB", "Java", "Kotlin"] },
       { group: "Mobile", items: ["Flutter", "Dart", "Firebase", "Swift"] },
       { group: "Infrastructure", items: ["Docker", "Kubernetes", "Git"] },
+      { group: "Others", items: ["Brain", "Curiosity"] },
     ],
     strava: "Follow my training on Strava",
   },
