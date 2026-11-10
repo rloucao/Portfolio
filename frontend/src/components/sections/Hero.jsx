@@ -31,10 +31,10 @@ const Hero = () => {
             >
               <img src={photo} alt="" width="900" height="1200" />
             </button>
-            <p className="status">
+            {/* <p className="status">
               <span className="status-dot" aria-hidden="true" />
               {t.status}
-            </p>
+            </p> */}
           </div>
           <p className="eyebrow" style={{ "--d": 1 }}>
             {t.hero.eyebrow}
