@@ -38,7 +38,7 @@ const en = {
     view: "View",
     projects: {
       messenger: {
-        title: "Hoppin",
+        title: "hoppin",
         tag: "Mobile App · Distributed systems",
         summary:
           "An end-to-end encrypted iOS messenger that keeps working when the internet doesn't. Messages go phone to phone over Wi-Fi, hop between nearby phones over Bluetooth, and fall back to a relay that stores only sealed envelopes it cannot read. Built from the protocol up: app, server and website.",

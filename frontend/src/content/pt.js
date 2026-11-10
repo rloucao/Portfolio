@@ -38,7 +38,7 @@ const pt = {
     view: "Ver",
     projects: {
       messenger: {
-        title: "Hoppin",
+        title: "hoppin",
         tag: "Mobile App · Sistemas distribuídos",
         summary:
           "Um mensageiro para iOS com encriptação ponta a ponta que continua a funcionar quando a internet falha. As mensagens vão de telemóvel para telemóvel por Wi-Fi, saltam entre telemóveis próximos por Bluetooth e, em último caso, passam por um relay que só guarda envelopes selados que não consegue ler. Construído a partir do protocolo: app, servidor e site.",
